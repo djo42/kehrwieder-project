@@ -1,40 +1,22 @@
 //import logo from './logo.svg'
 import './App.css'
 import { getVehicles } from './services'
+import React, { useState, useEffect } from 'react'
 
 function App() {
-  let abfrage
-  let piclink = ''
-  /*   ;(
+  const [list, setList] = useState([])
 
-    return display(abfrage)
-  })()
+  useEffect(() => {
+    getVehicles().then((res) => setList(res.data.Result.Cars))
+    //.then((datalist) => setList(datalist.Result))
+  }, [])
 
-  function display(result) {
-
-
-    const link = result[0]['ImageUrl']
-
-    console.log(link) */
-
-  //console.log(link)
-
-  //const link =
-
-  ;(async () => {
-    abfrage = await getVehicles()
-    
-    piclink = abfrage.Result.Cars.ImageUrl
-
-  })()
-
-  console.log(JSON.stringify(abfrage))
-  console.log(piclink)
+  const link = (list[0].ImageUrl)
 
   return (
     <div className="App">
       <header className="App-header">
-        <img src={piclink} className="App-logo" alt="logo" />
+        <img src={link} className="App-logo" alt="logo" />
         <p>
           Edit <code>src/App.js</code> and save to reload.
         </p>

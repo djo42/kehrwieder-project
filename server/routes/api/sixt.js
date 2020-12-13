@@ -1,7 +1,7 @@
 var express = require('express')
 var router = express.Router()
 var base64 = require('base-64')
-var axios = require('axios')
+var handler = require('./handler.js')
 
 require('dotenv').config()
 
@@ -19,29 +19,11 @@ router.get('/:api', async (req, res) => {
     process.env.SX_API_URL + req.params['api']
   }_2.01.json${parameters.replace('?', '?' + apiuser + '&')}&language=en_US`
 
+  const response = await handler.apicall(endpoint, basicauth)
 
-  async function apicall(url, login) {
-    const feedback = await axios
-      .get(url, {
-        headers: {
-          Authorization: login,
-        },
-      })
-      .catch((err) => console.log(err))
-
-    return feedback.data
-  }
-
-  const response = await apicall(endpoint, basicauth)
-
-  // passing data back
   res.setHeader('Content-Type', 'application/json')
-  res.end(JSON.stringify(response))
+  res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000')
+  res.json(response.data)
 })
 
 module.exports = router
-
-/*   console.log(requeststr)
-  console.log(parameters)
-  console.log(endpoint)
-  console.log(req.params['api']) */
