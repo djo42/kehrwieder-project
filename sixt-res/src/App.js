@@ -7,10 +7,7 @@ import styled from 'styled-components'
 export default function App() {
   const [list, setList] = useState([])
   const [display, setDisplay] = useState([])
-  const [airconfilter, setAirconfilter] = useState(false)
-  const [transmissionfilter, setTransmissionfilter] = useState(false)
-
-  var filter = {}
+  const [filter, setFilter] = useState({})
 
   useEffect(() => {
     getVehicles().then((res) => setList(res.data.Result.Cars))
@@ -21,12 +18,12 @@ export default function App() {
   }, [list])
 
   function resetFilter() {
-    setTransmissionfilter(false)
-    setAirconfilter(false)
+/*     setTransmfilter(false)
+    setAcfilter(false) */
     setDisplay(list)
   }
 
-  function applyFilter() {
+    function applyFilter() {
     const filtered = list.filter(function (item) {
       for (var key in filter) {
         if (item[key] === undefined || item[key] !== filter[key]) return false
@@ -36,14 +33,14 @@ export default function App() {
     setDisplay(filtered)
   }
 
-  useEffect(() => {
-    if (airconfilter === true) {
+  /*   useEffect(() => {
+    if (acfilter === true) {
       filter.HasAirCondition = true
     } else {
       delete filter.HasAirCondition
     }
 
-    if (transmissionfilter === true) {
+    if (transmfilter === true) {
       filter.HasAutomaticTransmission = true
     } else {
       delete filter.HasAutomaticTransmission
@@ -51,14 +48,29 @@ export default function App() {
     console.log(filter)
 
     applyFilter()
-  }, [transmissionfilter, airconfilter])
+  }, [transmfilter, acfilter]) */
+
+  function changeFilter(feature) {
+    var carfeatures = filter
+    const acfilt = carfeatures.hasOwnProperty(feature)
+    //console.log(carfeatures)
+
+    acfilt
+      ? delete carfeatures[feature]
+      : (carfeatures[feature] = true)
+    //console.log(carfeatures)
+
+    setFilter(carfeatures)
+    console.log(filter)
+    applyFilter()
+  }
 
   return (
     <>
-      <Button onClick={() => setAirconfilter(!airconfilter)}>Aircon</Button>
-      <Button onClick={() => setTransmissionfilter(!transmissionfilter)}>
-        Automatic
+      <Button onClick={() => changeFilter('HasAutomaticTransmission')}>
+        Gearbox
       </Button>
+      <Button onClick={() => changeFilter('HasAirCondition')}>A/C</Button>
       <Button onClick={() => resetFilter()}>Reset</Button>
       {display.map((car, index) => (
         <Card key={index} {...car}>
