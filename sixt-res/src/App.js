@@ -6,17 +6,67 @@ import styled from 'styled-components'
 
 export default function App() {
   const [list, setList] = useState([])
-  const [count, setCount] = useState(0)
+  const [display, setDisplay] = useState([])
+  const [airconfilter, setAirconfilter] = useState(false)
+  const [transmissionfilter, setTransmissionfilter] = useState(false)
+
+  var filter = {}
 
   useEffect(() => {
     getVehicles().then((res) => setList(res.data.Result.Cars))
-  }, [count])
+  }, [])
+
+  useEffect(() => {
+    setDisplay(list)
+  }, [list])
+
+  function resetFilter() {
+    setTransmissionfilter(false)
+    setAirconfilter(false)
+    setDisplay(list)
+  }
+
+  function applyFilter() {
+    const filtered = list.filter(function (item) {
+      for (var key in filter) {
+        if (item[key] === undefined || item[key] !== filter[key]) return false
+      }
+      return true
+    })
+    setDisplay(filtered)
+  }
+
+  useEffect(() => {
+    if (airconfilter === true) {
+      filter.HasAirCondition = true
+    } else {
+      delete filter.HasAirCondition
+    }
+
+    if (transmissionfilter === true) {
+      filter.HasAutomaticTransmission = true
+    } else {
+      delete filter.HasAutomaticTransmission
+    }
+    console.log(filter)
+
+    applyFilter()
+  }, [transmissionfilter, airconfilter])
 
   return (
     <>
-      {list.map((car, index) => (
+      <Button onClick={() => setAirconfilter(!airconfilter)}>Aircon</Button>
+      <Button onClick={() => setTransmissionfilter(!transmissionfilter)}>
+        Automatic
+      </Button>
+      <Button onClick={() => resetFilter()}>Reset</Button>
+      {display.map((car, index) => (
         <Card key={index} {...car}>
-          <img className="Car-Pic" src={list[index].ImageUrl} alt="cool car" />
+          <img
+            className="Car-Pic"
+            src={display[index].ImageUrl}
+            alt="cool car"
+          />
           <Button>Rent me</Button>
         </Card>
       ))}
