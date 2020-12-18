@@ -19,11 +19,15 @@ router.get('/:api', async (req, res) => {
     process.env.SX_API_URL + req.params['api']
   }_2.01.json${parameters.replace('?', '?' + apiuser + '&')}&language=en_US`
 
-  const response = await handler.apicall(endpoint, basicauth)
+  const response = await handler
+    .apicall(endpoint, basicauth)
+    .catch((error) => console.log(error))
 
   res.setHeader('Content-Type', 'application/json')
-  res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000')
+  res.setHeader('Access-Control-Allow-Origin', '*')
   res.json(response.data)
 })
 
 module.exports = router
+
+/* 'http://localhost:3000' */

@@ -2,9 +2,15 @@
 
 import axios from 'axios'
 
-export async function getVehicles() {
-  const result = await axios.get(
-    'http://localhost:4000/api/sixt/vehmodellist?cit=11'
-  )
+export async function getSixt(apiname, parameters) {
+  const apilink = process.env.REACT_APP_SX_API + apiname + parameters
+  console.log(apilink)
+  const result = await axios
+    .get(`${process.env.REACT_APP_SX_API}${apiname}${parameters}`)
+    .catch((error) => console.log(error))
   return result
 }
+
+
+
+
