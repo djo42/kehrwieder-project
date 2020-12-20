@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import './App.css'
 
-export default function Offerdataform({handleClick}) {
+export default function Offerdataform({ handleClick }) {
   const initialFormData = Object.freeze({
     uci: '',
     uti: '',
@@ -36,10 +36,7 @@ export default function Offerdataform({handleClick}) {
 
     const querystr = '?' + str.join('&')
 
-    console.log('querystring: ' + querystr)
-
     handleClick('availability', querystr)
-    //return console.log('?' + str.join('&'))
   }
 
   const handleChange = (event) => {
@@ -73,12 +70,7 @@ export default function Offerdataform({handleClick}) {
         Pick-up branch
       </Offerformlabel>
       <Offerformlabel htmlFor="codat">
-        <Offerinput
-          id="codat"
-          name="uda"
-          type="date"
-          onChange={handleChange}
-        />
+        <Offerinput id="codat" name="uda" type="date" onChange={handleChange} />
         Pick-up date
       </Offerformlabel>
       <Offerformlabel htmlFor="cotime">
@@ -100,12 +92,7 @@ export default function Offerdataform({handleClick}) {
         Return branch
       </Offerformlabel>
       <Offerformlabel htmlFor="cidat">
-        <Offerinput
-          id="cidat"
-          name="rda"
-          type="date"
-          onChange={handleChange}
-        />
+        <Offerinput id="cidat" name="rda" type="date" onChange={handleChange} />
         Return date
       </Offerformlabel>
       <Offerformlabel htmlFor="citime">
@@ -123,21 +110,21 @@ export default function Offerdataform({handleClick}) {
 }
 
 const Offerform = styled.form`
-    box-sizing: border-box;
-    display: inline-grid;
-    float: left;
-    width: 90%;
-    font-size: 12px;
-    border: 1px solid;
-    background: white;
-    border-radius: 3px;
-    border: lightgrey;
-    border-size: 1px;
-    box-shadow: 4px 4px 5px 2px rgba(0, 0, 255, 0.2);
-    color: white;
-    margin: 20px;
-    padding: 1em 1em;
-    `
+  box-sizing: border-box;
+  display: inline-grid;
+  float: left;
+  width: 90%;
+  font-size: 12px;
+  border: 1px solid;
+  background: white;
+  border-radius: 3px;
+  border: lightgrey;
+  border-size: 1px;
+  box-shadow: 4px 4px 5px 2px rgba(0, 0, 255, 0.2);
+  color: white;
+  margin: 20px;
+  padding: 1em 1em;
+`
 
 const Offerinput = styled.input`
     display: flex-box;
@@ -155,7 +142,7 @@ const Offerinput = styled.input`
     `
 
 const Offerformlabel = styled.label`
-    font-size: 1em;
-    color: hotpink;
-    margin: 5px;
-    `
+  font-size: 1em;
+  color: hotpink;
+  margin: 5px;
+`
