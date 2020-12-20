@@ -1,8 +1,8 @@
 import React from 'react'
 import styled from 'styled-components'
-import { getSixt } from './services.js'
+import './App.css'
 
-export default function Offerdataform() {
+export default function Offerdataform({handleClick}) {
   const initialFormData = Object.freeze({
     uci: '',
     uti: '',
@@ -36,9 +36,9 @@ export default function Offerdataform() {
 
     const querystr = '?' + str.join('&')
 
-    //console.log(querystr)
+    console.log('querystring: ' + querystr)
 
-    getSixt('availability', querystr)
+    handleClick('availability', querystr)
     //return console.log('?' + str.join('&'))
   }
 
@@ -72,7 +72,7 @@ export default function Offerdataform() {
         />
         Pick-up branch
       </Offerformlabel>
-      <Offerformlabel for="codat">
+      <Offerformlabel htmlFor="codat">
         <Offerinput
           id="codat"
           name="uda"
@@ -117,7 +117,7 @@ export default function Offerdataform() {
         />
         Return time
       </Offerformlabel>
-      <button onClick={handleSubmit}>start request</button>
+      <button onClick={handleSubmit}></button>
     </Offerform>
   )
 }
@@ -126,7 +126,7 @@ const Offerform = styled.form`
     box-sizing: border-box;
     display: inline-grid;
     float: left;
-    width: 100%;
+    width: 90%;
     font-size: 12px;
     border: 1px solid;
     background: white;
@@ -158,27 +158,4 @@ const Offerformlabel = styled.label`
     font-size: 1em;
     color: hotpink;
     margin: 5px;
-    `
-
-const Select = styled.select`
-    -moz-appearance: none;
-    -webkit-appearance: none;
-    width: 100%;
-    height: 35px;
-    background: white;
-    color: gray;
-    padding-left: 5px;
-    font-size: 14px;
-    border: none;
-    margin: 10px 0 0 0;
-
-        option {
-        color: black;
-        background: white;
-        font-weight: small;
-        display: flex;
-        white-space: pre;
-        min-height: 20px;
-        padding: 0px 2px 1px;
-        }
     `

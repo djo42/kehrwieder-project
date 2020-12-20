@@ -1,21 +1,33 @@
 import './App.css'
-import { getSixt } from './services'
+//import { getSixt } from './services'
 import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import Offerdataform from './Offerform.js'
+import axios from 'axios'
 
 export default function App() {
   const [list, setList] = useState([])
   const [display, setDisplay] = useState([])
   const [filter, setFilter] = useState({})
-  const api = process.env.REACT_APP_SX_VEHICLE
 
   //Call the API
 
-function callSixt(event) {
-  console.log('the event :' + event)
-    //getSixt(api, parameters).then((res) => setList(res.data.Result.Cars))
+  async function callSixt(apiname, parameters) {
+    const result = await axios
+      .get(`${process.env.REACT_APP_SX_API}${apiname}${parameters}`)
+      .catch((error) => console.log(error))
+
+      console.log(result.data.Result.Offers)
+      setList(result.data.Result.Offers)
+  
+    
+    /* return result */
   }
+/*   async function callSixt(api, parameters) {
+    const request = getSixt(api, parameters)
+    console.log(request.data.Result.Offers)
+    setList(request)
+  } */
 
   //Transfer API result into dynamic state 'display'
 
@@ -28,10 +40,13 @@ function callSixt(event) {
   function resetFilter() {
     setFilter({})
     setDisplay(list)
+    console.log("Display: " + display)
   }
 
   function applyFilter() {
+    
     const filtered = list.filter(function (item) {
+    
       for (var key in filter) {
         if (item[key] === undefined || item[key] !== filter[key]) return false
       }
@@ -54,13 +69,11 @@ function callSixt(event) {
 
   return (
     <>
-      <Offerdataform handleClick={callSixt}></Offerdataform>
+      <Offerdataform handleClick={callSixt} />
       <Filterbar>
         <Container onClick={() => changeFilter('HasAutomaticTransmission')}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            width="10vw"
-            height="auto"
             viewBox="0 0 25 25"
             preserveAspectRatio="xMidYMid meet"
           >
@@ -73,8 +86,6 @@ function callSixt(event) {
         <Container onClick={() => changeFilter('HasAirCondition')}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            width="10vw"
-            height="auto"
             viewBox="0 0 25 25"
             preserveAspectRatio="xMidYMid meet"
           >
@@ -87,8 +98,6 @@ function callSixt(event) {
         <Container onClick={() => resetFilter()}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            width="10vw"
-            height="auto"
             viewBox="0 0 25 25"
             preserveAspectRatio="xMidYMid meet"
           >
@@ -99,17 +108,17 @@ function callSixt(event) {
           </svg>
         </Container>
       </Filterbar>
-      {display.map((car, index) => (
-        <Card key={index} {...car}>
+      {display.map((offer, index) => (
+        <Card key={display[index].AvailabilityRow} {...offer}>
           <Headline>
-            {display[index].Examples[0] +
+            {display[index].Car.Examples[0] +
               ', ' +
-              display[index].Examples[1] +
+              display[index].Car.Examples[1] +
               ' or similar'}
           </Headline>
           <img
             className="Car-Pic"
-            src={display[index].ImageUrl}
+            src={display[index].Car.ImageUrl}
             alt="cool car"
           />
           <Filterbutton>Rent me</Filterbutton>
@@ -195,7 +204,6 @@ const Filterbutton = styled.div`
 
   &:active {
   transform: scale(0.99); */
-
 
 /*   useEffect(() => {
     getSixt(api, parameters).then((res) => setList(res.data.Result.Cars))
