@@ -17,17 +17,9 @@ export default function App() {
       .get(`${process.env.REACT_APP_SX_API}${apiname}${parameters}`)
       .catch((error) => console.log(error))
 
-      console.log(result.data.Result.Offers)
-      setList(result.data.Result.Offers)
-  
-    
-    /* return result */
+    console.log(result.data.Result.Offers)
+    setList(result.data.Result.Offers)
   }
-/*   async function callSixt(api, parameters) {
-    const request = getSixt(api, parameters)
-    console.log(request.data.Result.Offers)
-    setList(request)
-  } */
 
   //Transfer API result into dynamic state 'display'
 
@@ -40,15 +32,13 @@ export default function App() {
   function resetFilter() {
     setFilter({})
     setDisplay(list)
-    console.log("Display: " + display)
+    console.log('Display: ' + display)
   }
 
   function applyFilter() {
-    
     const filtered = list.filter(function (item) {
-    
       for (var key in filter) {
-        if (item[key] === undefined || item[key] !== filter[key]) return false
+        if (item.Car[key] === undefined || item.Car[key] !== filter[key]) return false
       }
       return true
     })
@@ -205,6 +195,3 @@ const Filterbutton = styled.div`
   &:active {
   transform: scale(0.99); */
 
-/*   useEffect(() => {
-    getSixt(api, parameters).then((res) => setList(res.data.Result.Cars))
-  }, [api, parameters]) */
