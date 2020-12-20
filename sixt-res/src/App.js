@@ -2,23 +2,28 @@ import './App.css'
 import { getSixt } from './services'
 import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
+import Offerdataform from './Offerform.js'
 
 export default function App() {
   const [list, setList] = useState([])
   const [display, setDisplay] = useState([])
   const [filter, setFilter] = useState({})
   const api = process.env.REACT_APP_SX_VEHICLE
-  const parameters = '?cit=110'
 
-  console.log(api + parameters)
+  //Call the API
 
-  useEffect(() => {
-    getSixt(api, parameters).then((res) => setList(res.data.Result.Cars))
-  }, [api, parameters])
+function callSixt(event) {
+  console.log('the event :' + event)
+    //getSixt(api, parameters).then((res) => setList(res.data.Result.Cars))
+  }
+
+  //Transfer API result into dynamic state 'display'
 
   useEffect(() => {
     setDisplay(list)
   }, [list])
+
+  //Reset the car feature filter
 
   function resetFilter() {
     setFilter({})
@@ -49,6 +54,7 @@ export default function App() {
 
   return (
     <>
+      <Offerdataform handleClick={callSixt}></Offerdataform>
       <Filterbar>
         <Container onClick={() => changeFilter('HasAutomaticTransmission')}>
           <svg
@@ -189,3 +195,8 @@ const Filterbutton = styled.div`
 
   &:active {
   transform: scale(0.99); */
+
+
+/*   useEffect(() => {
+    getSixt(api, parameters).then((res) => setList(res.data.Result.Cars))
+  }, [api, parameters]) */

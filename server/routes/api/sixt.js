@@ -6,6 +6,7 @@ var handler = require('./handler.js')
 require('dotenv').config()
 
 router.get('/:api', async (req, res) => {
+  console.log(req.originalUrl)
   const requeststr = req.originalUrl
   const parameters = requeststr.replace(
     `${req.baseUrl}/${req.params['api']}`,
@@ -18,6 +19,8 @@ router.get('/:api', async (req, res) => {
   const endpoint = `${
     process.env.SX_API_URL + req.params['api']
   }_2.01.json${parameters.replace('?', '?' + apiuser + '&')}&language=en_US`
+
+  console.log(endpoint)
 
   const response = await handler
     .apicall(endpoint, basicauth)
