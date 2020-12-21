@@ -57,8 +57,8 @@ export default function Offerdataform({ handleClick }) {
   return (
     <Offerform>
       <Offerformlabel htmlFor="agencypp">
-        <Offerinput type="checkbox" id="agencypp" name="agencypp" />
-        Agency Prepaid
+      Agency Prepaid:<Offerinput type="checkbox" id="agencypp" name="agencypp" />
+        
       </Offerformlabel>
       <Offerformlabel htmlFor="cocity">
         <Offerinput
@@ -104,7 +104,7 @@ export default function Offerdataform({ handleClick }) {
         />
         Return time
       </Offerformlabel>
-      <button onClick={handleSubmit}></button>
+      <button onClick={handleSubmit}>Send request</button>
     </Offerform>
   )
 }
@@ -112,9 +112,9 @@ export default function Offerdataform({ handleClick }) {
 const Offerform = styled.form`
   box-sizing: border-box;
   display: inline-grid;
-  float: left;
   width: 90%;
-  font-size: 12px;
+  font-size: 1em;
+  font-family: Roboto;
   border: 1px solid;
   background: white;
   border-radius: 3px;
@@ -130,19 +130,20 @@ const Offerinput = styled.input`
     display: flex-box;
     font-size: 14px;
     display: block;
-    color: hotpink;
+    color: purple;
     content: "Hello";
     top: 14px;
     right: 10px;
     width: 50%;
-    height: 2rem;
+    height: 1.5rem;
     margin: 10px;
     border-bottom: 2px grey !important;
     }
     `
 
 const Offerformlabel = styled.label`
+  display: inline-block;
   font-size: 1em;
-  color: hotpink;
+  color: purple;
   margin: 5px;
 `

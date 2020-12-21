@@ -38,7 +38,8 @@ export default function App() {
   function applyFilter() {
     const filtered = list.filter(function (item) {
       for (var key in filter) {
-        if (item.Car[key] === undefined || item.Car[key] !== filter[key]) return false
+        if (item.Car[key] === undefined || item.Car[key] !== filter[key])
+          return false
       }
       return true
     })
@@ -66,6 +67,8 @@ export default function App() {
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 25 25"
             preserveAspectRatio="xMidYMid meet"
+            width="50%"
+            height="50%"
           >
             <path
               fill="black"
@@ -78,6 +81,8 @@ export default function App() {
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 25 25"
             preserveAspectRatio="xMidYMid meet"
+            width="50%"
+            height="50%"
           >
             <polygon
               fill="#191919"
@@ -90,6 +95,8 @@ export default function App() {
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 25 25"
             preserveAspectRatio="xMidYMid meet"
+            width="50%"
+            height="50%"
           >
             <path
               fill="#191919"
@@ -99,18 +106,47 @@ export default function App() {
         </Container>
       </Filterbar>
       {display.map((offer, index) => (
-        <Card key={display[index].AvailabilityRow} {...offer}>
-          <Headline>
-            {display[index].Car.Examples[0] +
-              ', ' +
-              display[index].Car.Examples[1] +
-              ' or similar'}
-          </Headline>
+        <Card key={offer.AvailabilityRow} {...offer}>
+          <Headline>{offer.Car.Examples.join(', ')}</Headline>
           <img
             className="Car-Pic"
             src={display[index].Car.ImageUrl}
             alt="cool car"
           />
+
+          <Extralist>
+            {offer.Extras.Included.map((item, index) => {
+              return (
+                <li key={index} {...item}>
+                  {item.Name}
+                </li>
+              )
+            })}
+          </Extralist>
+          <Extralist>
+            {offer.Coverages.Included.map((item, index) => {
+              return (
+                <ul>
+                  {' '}
+                  <li key={index} {...item}>
+                    {item.Name +
+                      ' (Excess: ' +
+                      item.Excess.Amount +
+                      ' ' +
+                      item.Excess.Currency +
+                      ')'}
+                  </li>
+                </ul>
+              )
+            })}
+          </Extralist>
+
+          {console.log(...display[index].Coverages.Included)}
+
+          <Pricedisplay>
+            Total Price: {display[index].Total.DueAmount}{' '}
+            {display[index].Total.Currency}
+          </Pricedisplay>
           <Filterbutton>Rent me</Filterbutton>
         </Card>
       ))}
@@ -125,9 +161,16 @@ const Filterbar = styled.div`
   max-height: 100px;
 `
 
+const Extralist = styled.div`
+  color: purple;
+  font-size: 0.8em;
+  margin: 5px 0 5px 20px;
+`
+
 const Headline = styled.h3`
-  color: hotpink;
-  font-size: 1rem;
+  color: purple;
+  font-size: 1.25em;
+  margin: 5px 0 5px 20px;
 `
 const Card = styled.div`
   background: white;
@@ -136,6 +179,7 @@ const Card = styled.div`
   border-size: 1px;
   box-shadow: 4px 4px 5px 2px rgba(0, 0, 255, .2);
   color: white;
+  width:90%;
   margin: 2em 1em;
   padding: 1em 1em;
 
@@ -144,18 +188,27 @@ const Card = styled.div`
 
 const Container = styled.div`
   align-items: center;
-  font-size: 0.75rem;
-  display: flex;
+  font-size: 0.75em;
   padding-right: 1.5625rem;
   text-align: center;
-  height: 50px;
-  position: relative;
-  width: 50px;
   height: auto;
+  width: auto;
   padding-bottom: 0;
   vertical-align: middle;
   margin: 10px;
 `
+
+const Pricedisplay = styled.div`
+  text-align: left;
+  color: purple;
+  font-style: normal;
+  font-weight: bold;
+  font-family: Roboto;
+  font-size: 1.2em;
+  height: 50px;
+  margin-top: 12px;
+`
+
 const Filterbutton = styled.div`
   display: flex;
   height: 50px;
@@ -166,7 +219,7 @@ const Filterbutton = styled.div`
   padding: 0;
   margin: 10px;
   text-decoration: none;
-  background: none;
+  background: forestgreen;
   color: white;
   font-family: sans-serif;
   font-size: 10px;
@@ -194,4 +247,3 @@ const Filterbutton = styled.div`
 
   &:active {
   transform: scale(0.99); */
-
