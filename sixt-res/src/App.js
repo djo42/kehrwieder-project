@@ -1,5 +1,4 @@
 import './App.css'
-//import { getSixt } from './services'
 import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import Offerdataform from './Offerform.js'
@@ -17,7 +16,14 @@ export default function App() {
       .get(`${process.env.REACT_APP_SX_API}${apiname}${parameters}`)
       .catch((error) => console.log(error))
 
-    console.log(result.data.Result.Offers)
+    //console.log(result.data.Result.Offers)
+
+    window.sessionStorage.setItem('offer', JSON.stringify(result))
+
+    console.log(localStorage)
+    console.log(sessionStorage)
+    console.log(JSON.parse(sessionStorage.offer))
+
     setList(result.data.Result.Offers)
   }
 
@@ -67,8 +73,8 @@ export default function App() {
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 25 25"
             preserveAspectRatio="xMidYMid meet"
-            width="50%"
-            height="50%"
+            width="66%"
+            height="66%"
           >
             <path
               fill="black"
@@ -108,38 +114,39 @@ export default function App() {
       {display.map((offer, index) => (
         <Card key={offer.AvailabilityRow} {...offer}>
           <Headline>{offer.Car.Examples.join(', ')}</Headline>
-          <img
-            className="Car-Pic"
-            src={display[index].Car.ImageUrl}
-            alt="cool car"
-          />
+          <img src={display[index].Car.ImageUrl} alt={offer.Car.Examples[1]} />
 
-          <Extralist>
+          <StyledTable>
+            <tr>
+              <th align="left">Included Extras</th>
+            </tr>
             {offer.Extras.Included.map((item, index) => {
               return (
-                <li key={index} {...item}>
-                  {item.Name}
-                </li>
+                <tr key={index} {...item}>
+                  <td align="left">{item.Name}</td>
+                </tr>
               )
             })}
-          </Extralist>
-          <Extralist>
+          </StyledTable>
+
+          <StyledTable>
+            <tr>
+              <th align="left">Coverage</th>
+              <th align="right">Excess</th>
+            </tr>
             {offer.Coverages.Included.map((item, index) => {
               return (
-                <ul>
-                  {' '}
-                  <li key={index} {...item}>
-                    {item.Name +
-                      ' (Excess: ' +
-                      item.Excess.Amount +
-                      ' ' +
-                      item.Excess.Currency +
-                      ')'}
-                  </li>
-                </ul>
+                <tr key={index} {...item}>
+                  <td align="left">{item.Name.replace('Collision Damage Waiver', 'CDW')}</td>
+                  <td align="right">
+                    {Math.floor(item.Excess.Amount).toLocaleString('de-DE') + ' ' + item.Excess.Currency}
+                  </td>
+                </tr>
               )
             })}
-          </Extralist>
+          </StyledTable>
+
+
 
           {console.log(...display[index].Coverages.Included)}
 
@@ -161,19 +168,14 @@ const Filterbar = styled.div`
   max-height: 100px;
 `
 
-const Extralist = styled.div`
-  color: purple;
-  font-size: 0.8em;
-  margin: 5px 0 5px 20px;
-`
 
 const Headline = styled.h3`
-  color: purple;
+  color: #376485ff;
   font-size: 1.25em;
   margin: 5px 0 5px 20px;
 `
 const Card = styled.div`
-  background: white;
+  background: linear-gradient(180deg, #8EA9D6ff, #99CED4ff, #E4E0DFff);
   border-radius: 3px;
   border: lightgrey;
   border-size: 1px;
@@ -228,6 +230,58 @@ const Filterbutton = styled.div`
   align-items: center;
   justify-content: center;
 }`
+
+const StyledTable = styled.table`
+  caption-side: top;
+  border: none;
+  border-collapse: collapse;
+  /* border-collapse: separate; */
+  /* border-spacing: 5px 10px; */
+
+  caption-side: bottom;
+  /* empty-cell: show | hide;  */
+  /* empty-cell is a property of table or the cells themselves */
+
+  /* vertical-align: baseline | sub | super | text-top | 
+                text-bottom | middle | top | bottom | 
+                <percentage> | <length> */
+
+  /* tbody {
+    vertical-align: center;
+  }              */
+  td,
+  th {
+    border: none;
+  }
+  /* td,
+  th {
+    border: 1px solid;
+  } */
+
+  td {
+    padding: 5px 5px;
+    font-size: 1em;
+    margin: 0;
+  }
+
+  tbody tr {
+    :nth-of-type(odd) {
+      background-color: #efefef;
+    }
+    :hover {
+      background-color: lightpink;
+    }
+  }
+  thead > tr {
+    background-color: #c2c2c2;
+  }
+  caption {
+    font-size: 0.9em;
+    padding: 5px;
+    font-weight: bold;
+  }
+`;
+
 
 /*   transition: background 250ms ease-in-out, 
               transform 150ms ease;

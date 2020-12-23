@@ -36,6 +36,8 @@ export default function Offerdataform({ handleClick }) {
 
     const querystr = '?' + str.join('&')
 
+    console.log('availability' + querystr)
+
     handleClick('availability', querystr)
   }
 
@@ -129,6 +131,7 @@ const Offerform = styled.form`
 const Offerinput = styled.input`
     display: flex-box;
     font-size: 14px;
+    font-family: Roboto;
     display: block;
     color: purple;
     content: "Hello";
