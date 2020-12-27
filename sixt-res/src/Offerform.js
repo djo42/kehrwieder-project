@@ -58,10 +58,10 @@ export default function Offerdataform({ handleClick }) {
 
   return (
     <Offerform>
-      <Offerformlabel htmlFor="agencypp">
-      Agency Prepaid:<Offerinput type="checkbox" id="agencypp" name="agencypp" />
-        
-      </Offerformlabel>
+
+   <Offerinput type="checkbox" id="agencypp" name="agencypp" /><Offerformlabel htmlFor="agencypp">Agency Prepaid</Offerformlabel><Zeilenwechsel />
+  
+
       <Offerformlabel htmlFor="cocity">
         <Offerinput
           id="cocity"
@@ -71,6 +71,7 @@ export default function Offerdataform({ handleClick }) {
         />
         Pick-up branch
       </Offerformlabel>
+
       <Offerformlabel htmlFor="codat">
         <Offerinput id="codat" name="uda" type="date" onChange={handleChange} />
         Pick-up date
@@ -84,6 +85,7 @@ export default function Offerdataform({ handleClick }) {
         />
         Pick-up time
       </Offerformlabel>
+
       <Offerformlabel htmlFor="cicity">
         <Offerinput
           id="cicity"
@@ -93,10 +95,12 @@ export default function Offerdataform({ handleClick }) {
         />
         Return branch
       </Offerformlabel>
+
       <Offerformlabel htmlFor="cidat">
         <Offerinput id="cidat" name="rda" type="date" onChange={handleChange} />
         Return date
       </Offerformlabel>
+
       <Offerformlabel htmlFor="citime">
         <Offerinput
           id="citime"
@@ -106,6 +110,7 @@ export default function Offerdataform({ handleClick }) {
         />
         Return time
       </Offerformlabel>
+
       <button onClick={handleSubmit}>Send request</button>
     </Offerform>
   )
@@ -113,8 +118,7 @@ export default function Offerdataform({ handleClick }) {
 
 const Offerform = styled.form`
   box-sizing: border-box;
-  display: inline-grid;
-  width: 90%;
+  width: 100%;
   font-size: 1em;
   font-family: Roboto;
   border: 1px solid;
@@ -126,10 +130,15 @@ const Offerform = styled.form`
   color: white;
   margin: 20px;
   padding: 1em 1em;
+  label, input, select, textarea {
+    display: block;
+    float: left;
 `
 
+
 const Offerinput = styled.input`
-    display: flex-box;
+    display: block;
+    float: left;
     font-size: 14px;
     font-family: Roboto;
     display: block;
@@ -137,7 +146,7 @@ const Offerinput = styled.input`
     content: "Hello";
     top: 14px;
     right: 10px;
-    width: 50%;
+    width: 33%;
     height: 1.5rem;
     margin: 10px;
     border-bottom: 2px grey !important;
@@ -145,8 +154,39 @@ const Offerinput = styled.input`
     `
 
 const Offerformlabel = styled.label`
-  display: inline-block;
+  display: block;
+  float: left;
+  text-align:left;
   font-size: 1em;
   color: purple;
   margin: 5px;
 `
+
+const Zeilenwechsel = styled.br`
+  clear: left;
+`
+
+/* <form>
+<label for="name">Name</label><input type="text" name="name" /><br />
+<label for="email">E-Mail</label><input type="text" name="email" /><br />
+<label for="betreff">Betreff:</label><input type="text" name="betreff" /><br />
+</form> */
+
+
+/* form{
+// width: xxxpx;
+}
+label, input, select, textarea {
+display: block;
+float: left;
+}
+label {
+// width: xxxpx;
+// text-align: right;
+}
+input, select, textarea {
+// width: xxxpx;
+}
+form br {
+clear: left;
+} */
