@@ -65,42 +65,50 @@ export default function Offerdataform({ handleClick }) {
 
   return (
     <Formcontainer>
-      <Formheadline>Please enter your request details</Formheadline>
+      <Formheadline>Request details</Formheadline>
       <Inputcontainer>
         <Input type="checkbox" id="agencypp" name="agencypp" />
         <Label htmlFor="agencypp">Agency Prepaid</Label>
       </Inputcontainer>
       <Inputcontainer>
         <Label htmlFor="cocity">Pick-up branch</Label>
-        <BranchInput id="cocity" name="uci" type="text" onChange={handleChange} />
+        <BranchInput
+          id="cocity"
+          name="uci"
+          type="text"
+          onChange={handleChange}
+        />
       </Inputcontainer>
       <Inputcontainer>
         <Label htmlFor="cicity">Return branch</Label>
-        <BranchInput id="cicity" name="rci" type="text" onChange={handleChange} />
+        <BranchInput
+          id="cicity"
+          name="rci"
+          type="text"
+          onChange={handleChange}
+        />
       </Inputcontainer>
 
-      
+      <Inputcontainer>
         <Inputcontainer>
-          <Inputcontainer>
-            <Label htmlFor="codat">Pick-up date</Label>
-            <Input id="codat" name="uda" type="date" onChange={handleChange} />
-          </Inputcontainer>
-          <Inputcontainer>
-            <Label htmlFor="cotime">Pick-up time</Label>
-            <Input id="cotime" name="uti" type="time" onChange={handleChange} />
-          </Inputcontainer>
+          <Label htmlFor="codat">Pick-up date</Label>
+          <Input id="codat" name="uda" type="date" onChange={handleChange} />
         </Inputcontainer>
         <Inputcontainer>
-          <Inputcontainer>
-            <Label htmlFor="cidat">Return date</Label>
-            <Input id="cidat" name="rda" type="date" onChange={handleChange} />
-          </Inputcontainer>
-          <Inputcontainer>
-            <Label htmlFor="citime">Return time</Label>
-            <Input id="citime" name="rti" type="time" onChange={handleChange} />
-          </Inputcontainer>
+          <Label htmlFor="cotime">Pick-up time</Label>
+          <Input id="cotime" name="uti" type="time" onChange={handleChange} />
         </Inputcontainer>
-  
+      </Inputcontainer>
+      <Inputcontainer>
+        <Inputcontainer>
+          <Label htmlFor="cidat">Return date</Label>
+          <Input id="cidat" name="rda" type="date" onChange={handleChange} />
+        </Inputcontainer>
+        <Inputcontainer>
+          <Label htmlFor="citime">Return time</Label>
+          <Input id="citime" name="rti" type="time" onChange={handleChange} />
+        </Inputcontainer>
+      </Inputcontainer>
 
       <button onClick={handleSubmit}>Send request</button>
     </Formcontainer>

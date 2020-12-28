@@ -2,6 +2,7 @@ import './App.css'
 import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import Offerdataform from './Offerform.js'
+import Carimage from './Carimage.js'
 import axios from 'axios'
 
 export default function App() {
@@ -114,7 +115,7 @@ export default function App() {
       {display.map((offer, index) => (
         <Card key={offer.AvailabilityRow} {...offer}>
           <Headline>{offer.Car.Examples.join(', ')}</Headline>
-          <img src={display[index].Car.ImageUrl} alt={offer.Car.Examples[1]} />
+          <Carpic src={display[index].Car.ImageUrl} alt={offer.Car.Examples[1]} />
 
           <StyledTable>
             <tr>
@@ -172,19 +173,20 @@ const Filterbar = styled.div`
 const Headline = styled.h3`
   color: #376485ff;
   font-size: 1.25em;
-  margin: 5px 0 5px 20px;
+  margin: 0;
+  margin-bottom: 10px;
 `
 const Card = styled.div`
-  background: linear-gradient(180deg, #8EA9D6ff, #99CED4ff, #E4E0DFff);
-  border-radius: 3px;
-  border: lightgrey;
-  border-size: 1px;
-  box-shadow: 4px 4px 5px 2px rgba(0, 0, 255, .2);
-  color: white;
-  width:90%;
-  margin: 2em 1em;
-  padding: 1em 1em;
+  width: auto;
+  padding: 20px;
+  margin: 20px;
+  margin-top: 40px;
 
+  background:linear-gradient(180deg, #8EA9D6ff, #99CED4ff, #E4E0DFff);
+  box-sizing: border-box;
+  box-shadow: 0 15px 25px rgba(0,0,0,.6);
+    border-radius: 10px;
+  color: white;
   }
 `
 
@@ -230,6 +232,14 @@ const Filterbutton = styled.div`
   align-items: center;
   justify-content: center;
 }`
+
+const Carpic = styled.img`
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+
+` 
+
 
 const StyledTable = styled.table`
   caption-side: top;

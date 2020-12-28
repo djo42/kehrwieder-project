@@ -2,9 +2,10 @@
 import styled from 'styled-components'
 
 export const Formcontainer = styled.form`
-  width: 100%;
-  padding: 40px;
-  margin: 10px;
+  display: block;
+  width: auto;
+  padding: 20px;
+  margin: 20px;
   background:linear-gradient(180deg, #8EA9D6ff, #99CED4ff, #E4E0DFff);
   box-sizing: border-box;
   box-shadow: 0 15px 25px rgba(0,0,0,.6);
@@ -15,7 +16,7 @@ export const Formheadline = styled.h2`
   margin: 0 0 30px;
   padding: 0;
   color: #fff;
-  text-align: center;
+  text-align: left;
 `
   
 export const Inputcontainer = styled.div`
@@ -30,7 +31,7 @@ export const Label = styled.label`
   left: 0;
   padding: 10px 0;
   font-size: 12px;
-  color: white;
+  color: grey;
   pointer-events: none;
   transition: .5s;
 `
@@ -40,10 +41,10 @@ export const Input = styled.input`
   width: 100%;
   padding: 10px 0;
   font-size: 16px;
-  color: #fff;
+  color: grey;
   margin-bottom: 30px;
   border: none;
-  border-bottom: 1px solid #fff;
+  border-bottom: 1px solid grey;
   outline: none;
   background: transparent;
 `
