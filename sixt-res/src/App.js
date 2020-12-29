@@ -2,7 +2,6 @@ import './App.css'
 import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import Offerdataform from './Offerform.js'
-import Carimage from './Carimage.js'
 import axios from 'axios'
 import Filters from './Filters.js'
 
@@ -73,46 +72,40 @@ export default function App() {
       {display.map((offer, index) => (
         <Card key={offer.AvailabilityRow} {...offer}>
           <Imgcontainer>
-            <Headline>{offer.Car.Examples.join(', ')}</Headline>
+            <Headline>
+              <Carexample>
+                {offer.Car.Examples.join(', ').toUpperCase()}
+              </Carexample>
+            </Headline>
             <Carpic
               src={display[index].Car.ImageUrl}
               alt={offer.Car.Examples[1]}
             />{' '}
           </Imgcontainer>
 
-          <StyledTable>
-            <tr>
-              <th align="left">Included Extras</th>
-            </tr>
+          <Taglist>
             {offer.Extras.Included.map((item, index) => {
               return (
-                <tr key={index} {...item}>
-                  <td align="left">{item.Name}</td>
-                </tr>
+                <Tag key={index} {...item}>
+                  {item.Name}
+                </Tag>
               )
             })}
-          </StyledTable>
-
-          <StyledTable>
-            <tr>
-              <th align="left">Coverage</th>
-              <th align="right">Excess</th>
-            </tr>
+          </Taglist>
+          <Taglist>
             {offer.Coverages.Included.map((item, index) => {
               return (
-                <tr key={index} {...item}>
-                  <td align="left">
-                    {item.Name.replace('Collision Damage Waiver', 'CDW')}
-                  </td>
-                  <td align="right">
-                    {Math.floor(item.Excess.Amount).toLocaleString('de-DE') +
-                      ' ' +
-                      item.Excess.Currency}
-                  </td>
-                </tr>
+                <Tag key={index} {...item}>
+                  {item.Name.replace('Collision Damage Waiver', 'CDW') +
+                    ' (Excess: ' +
+                    Math.floor(item.Excess.Amount).toLocaleString('de-DE') +
+                    ' ' +
+                    item.Excess.Currency +
+                    ')'}
+                </Tag>
               )
             })}
-          </StyledTable>
+          </Taglist>
 
           {console.log(...display[index].Coverages.Included)}
 
@@ -127,13 +120,13 @@ export default function App() {
   )
 }
 
-const Headline = styled.h3`
-  display: inline;
+const Headline = styled.h2`
+  display: inline-block;
   text-align: left;
   position: absolute;
+  line-height: 160%;
   top: 5px;
   left: 0;
-  background: black;
   color: white;
   font-size: 1.1em;
   padding: 5px;
@@ -165,6 +158,27 @@ const Pricedisplay = styled.div`
   margin-top: 12px;
 `
 
+const Taglist = styled.ul`
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: stretch;
+  list-style: none;
+  list-style-position: inside;
+  padding: 0;
+  margin: 0 10px 0 10px;
+`
+
+const Tag = styled.li`
+  margin: 5px 0 0 5px;
+  padding: 5px;
+  color: white;
+  background: #ff5f00;
+  font-size: 0.8em;
+  font-weight: bold;
+  vertical-align: middle;
+`
+
 const Filterbutton = styled.div`
   display: flex;
   height: 50px;
@@ -189,7 +203,17 @@ const Carpic = styled.img`
   width: 100%;
   height: auto;
   border-radius: 10px 10px 0 0;
-  padding-top:10px;
+  margin-top: 20px;
+`
+
+const Carexample = styled.span`
+  color: white;
+  background: black;
+  text-align: center;
+  padding: 5px;
+  margin-top: 5px;
+  font-size: 1, 15em;
+  box-decoration-break: clone;
 `
 
 const Imgcontainer = styled.div`
@@ -199,7 +223,6 @@ const Imgcontainer = styled.div`
   margin: 0;
   padding: 5px;
   border-radius: 10px 10px 0 0;
-
 `
 
 const StyledTable = styled.table`
