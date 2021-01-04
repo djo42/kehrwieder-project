@@ -6,6 +6,7 @@ var logger = require('morgan')
 
 var indexRouter = require('./routes/index')
 var sixtRouter = require('./routes/api/sixt')
+var sixtdocRouter = require('./routes/api/sixtdocs')
 var fxratesRouter = require('./routes/api/fxrates')
 
 var app = express()
@@ -22,6 +23,7 @@ app.use(express.static(path.join(__dirname, 'public')))
 
 app.use('/', indexRouter)
 app.use('/api/sixt', sixtRouter)
+app.use('/api/sixtdocs', sixtdocRouter)
 app.use('/api/fx', fxratesRouter)
 
 // catch 404 and forward to error handler

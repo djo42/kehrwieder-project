@@ -1,13 +1,15 @@
 import React from 'react'
 import './App.css'
 import {
-  Formcontainer,
-  Formheadline,
+  Textwrapper,
+  Card,
+  Button,
+  Headline,
   Inputcontainer,
   BranchInput,
   Input,
   Label,
-} from './Forms'
+} from './components/Components'
 
 export default function Offerdataform({ handleClick }) {
   const initialFormData = Object.freeze({
@@ -28,7 +30,7 @@ export default function Offerdataform({ handleClick }) {
       uci: obj.uci,
       rci: obj.rci,
       age: process.env.REACT_APP_SX_AGE1,
-      kdnr: process.env.REACT_APP_SX_KDNR1,
+      kdnr: process.env.REACT_APP_SX_KDNR3,
       ctyp: 'P',
       wakz: 'KRW',
       posl: 'GB',
@@ -59,13 +61,16 @@ export default function Offerdataform({ handleClick }) {
 
   const handleSubmit = (event) => {
     event.preventDefault()
+    console.log(formData)
     serialize(formData)
     // ... submit to API or something
   }
 
   return (
-    <Formcontainer>
-      <Formheadline>Request details</Formheadline>
+    <Card>
+      <Textwrapper>
+        <Headline>RENTAL DETAILS</Headline>
+      </Textwrapper>
       <Inputcontainer>
         <Input type="checkbox" id="agencypp" name="agencypp" />
         <Label htmlFor="agencypp">Agency Prepaid</Label>
@@ -110,7 +115,7 @@ export default function Offerdataform({ handleClick }) {
         </Inputcontainer>
       </Inputcontainer>
 
-      <button onClick={handleSubmit}>Send request</button>
-    </Formcontainer>
+      <Button onClick={handleSubmit}>Send request</Button>
+    </Card>
   )
 }
