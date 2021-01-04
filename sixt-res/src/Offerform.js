@@ -5,8 +5,10 @@ import {
   Card,
   Button,
   Headline,
-  Inputcontainer,
+  InputcontainerRow,
+  InputcontainerColumn,
   BranchInput,
+  DatetimeInput,
   Input,
   Label,
 } from './components/Components'
@@ -22,6 +24,16 @@ export default function Offerdataform({ handleClick }) {
   })
 
   const [formData, updateFormData] = React.useState(initialFormData)
+
+  var date1 = new Date()
+  var date2 = new Date()
+  var start = new Date(date1.setDate(date1.getDate() + 30)).toISOString().substr(0,10);
+  var end = new Date(date2.setDate(date2.getDate() + 37)).toISOString().substr(0,10);
+  
+
+  console.log(date2)
+
+  
 
   function serialize(obj) {
     var req = {
@@ -71,49 +83,51 @@ export default function Offerdataform({ handleClick }) {
       <Textwrapper>
         <Headline>RENTAL DETAILS</Headline>
       </Textwrapper>
-      <Inputcontainer>
+      <InputcontainerRow>
         <Input type="checkbox" id="agencypp" name="agencypp" />
         <Label htmlFor="agencypp">Agency Prepaid</Label>
-      </Inputcontainer>
-      <Inputcontainer>
-        <Label htmlFor="cocity">Pick-up branch</Label>
-        <BranchInput
-          id="cocity"
-          name="uci"
-          type="text"
-          onChange={handleChange}
-        />
-      </Inputcontainer>
-      <Inputcontainer>
-        <Label htmlFor="cicity">Return branch</Label>
-        <BranchInput
-          id="cicity"
-          name="rci"
-          type="text"
-          onChange={handleChange}
-        />
-      </Inputcontainer>
+      </InputcontainerRow>
+      <InputcontainerColumn>
+        <InputcontainerColumn>
+          <Label htmlFor="cocity">Pick-up branch</Label>
+          <BranchInput
+            id="cocity"
+            name="uci"
+            type="text"
+            onChange={handleChange}
+          />
+        </InputcontainerColumn>
+        <InputcontainerColumn>
+          <Label htmlFor="cicity">Return branch</Label>
+          <BranchInput
+            id="cicity"
+            name="rci"
+            type="text"
+            onChange={handleChange}
+          />
+        </InputcontainerColumn>
+      </InputcontainerColumn>
 
-      <Inputcontainer>
-        <Inputcontainer>
+      <InputcontainerRow>
+        <InputcontainerColumn>
           <Label htmlFor="codat">Pick-up date</Label>
-          <Input id="codat" name="uda" type="date" onChange={handleChange} />
-        </Inputcontainer>
-        <Inputcontainer>
+          <DatetimeInput id="codat" name="uda" type="date" onChange={handleChange}/>
+        </InputcontainerColumn>
+        <InputcontainerColumn>
           <Label htmlFor="cotime">Pick-up time</Label>
-          <Input id="cotime" name="uti" type="time" onChange={handleChange} />
-        </Inputcontainer>
-      </Inputcontainer>
-      <Inputcontainer>
-        <Inputcontainer>
+          <DatetimeInput id="cotime" name="uti" type="time" onChange={handleChange} />
+        </InputcontainerColumn>
+        </InputcontainerRow>
+        <InputcontainerRow>
+        <InputcontainerColumn>
           <Label htmlFor="cidat">Return date</Label>
-          <Input id="cidat" name="rda" type="date" onChange={handleChange} />
-        </Inputcontainer>
-        <Inputcontainer>
+          <DatetimeInput id="cidat" name="rda" type="date" onChange={handleChange} />
+        </InputcontainerColumn>
+        <InputcontainerColumn>
           <Label htmlFor="citime">Return time</Label>
-          <Input id="citime" name="rti" type="time" onChange={handleChange} />
-        </Inputcontainer>
-      </Inputcontainer>
+          <DatetimeInput id="citime" name="rti" type="time" onChange={handleChange} />
+        </InputcontainerColumn>
+        </InputcontainerRow>
 
       <Button onClick={handleSubmit}>Send request</Button>
     </Card>

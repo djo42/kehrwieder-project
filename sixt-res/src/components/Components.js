@@ -72,20 +72,81 @@ export const Toggler = styled.div`
 
 `
 
-export const Inputcontainer = styled.div`
+export const InputcontainerRow = styled.div`
     display: flex;
-    margin: 20px;
+    flex-direction: row;
+    align-items: stretch;
+    justify-items: middle;
+    margin: 10px;
+    padding: 5px;
+    width: 100%;
+`
+
+export const InputcontainerColumn = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-items: middle;
+    margin: 10px;
+    padding: 5px;
     width: auto;
-` 
+`
+
+export const Input = styled.input`
+  display: flex;
+  width: auto;
+  align-items: stretch;
+  height: 30px;
+  padding: 0;
+  font-size: 1em;
+  line-height: 150%;
+  color: grey;
+  margin: 0;
+  border: none;
+  border-bottom: 1px solid grey;
+  outline: none;
+  background: transparent;
+`
+
+export const DatetimeInput = styled.input`
+  display: flex;
+  width: auto;
+  align-items: stretch;
+  height: 30px;
+  padding: 0;
+  font-size: 1em;
+  line-height: 150%;
+  color: grey;
+  margin: 0;
+  border: none;
+  border-bottom: 1px solid grey;
+  outline: none;
+  background: transparent;
+`
+
+export const BranchInput = styled.input`
+  display: flex;
+  width: auto;
+  align-items: stretch;
+  padding: 0;
+  margin: 0;
+  font-size: 1em;
+  color: grey;
+  border: none;
+  border-bottom: 1px solid grey;
+  outline: none;
+  line-height: 150%;
+  background: transparent;
+`
+
 export const Label = styled.label`
-    margin: 0 10px 30px 10px;
-    top:-25px;
-    left: 0;
-    padding: 10px 0;
+    margin: 0;
+    padding: 0;
     font-size: 12px;
     color: grey;
     pointer-events: none;
     transition: .5s;
+    width: auto;
 `
 
 export const Filterbar = styled.div`
@@ -106,35 +167,6 @@ export const Filtercontainer = styled.div`
     vertical-align: middle;
     margin: 10px;
 `
-
-export const Input = styled.input`
-  display: flex;
-  width: 100%;
-  padding: 10px 0;
-  font-size: 16px;
-  color: grey;
-  margin: 0 10px 30px 10px;
-  border: none;
-  border-bottom: 1px solid grey;
-  outline: none;
-  background: transparent;
-`
-
-export const BranchInput = styled.input`
-  display: flex;
-  width: 100%;
-  padding: 10px 0;
-  font-size: 16px;
-  color: grey;
-  margin-bottom: 30px;
-  border: none;
-  border-bottom: 1px solid grey;
-  outline: none;
-  background: transparent;
-`
-
-
-
 
 export const Pricedisplay = styled.div`
   text-align: left;
