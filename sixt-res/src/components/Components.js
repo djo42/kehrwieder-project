@@ -1,76 +1,6 @@
 import styled from 'styled-components'
 
-export const Card = styled.div`
-    display: flex;
-    flex-direction:column;
-    align-items: left;
-    justify-content: left;
-    width: auto;
-    padding: 0;
-    margin: 25px;
-    background: white;  
-    box-sizing: border-box;
-    box-shadow: 0 15px 25px rgba(0,0,0,.6);
-    border-radius: 10px;
-    color: black;
-`
-
-export const Cardcontainer = styled.div`
-    display: flex;
-    flex-direction:column;
-    align-items: left;
-    justify-content: left;
-    width: 100%;
-    padding: 0 20px;
-    margin: 0;
-    background: transparent;  
-    box-sizing: border-box;
-    border: none;
-`
-
-export const Headline = styled.h2`
-  display: inline-block;
-  line-height: 150%;
-  text-align: left;
-  color: white;
-  font-size: 1.2em;
-  padding: 0;
-  margin: 0;
-`
-
-export const OfferCardHeadline = styled.h2`
-  position: absolute;
-    top: 20px;
-    left:20px;
-    line-height: 160%;
-    text-align: left;
-    color: white;
-    font-size: 1.1em;
-    padding: 0;
-    margin:0;
-    margin-right: 20px;
-    z-index: 100;
-`
-
-export const Textwrapper = styled.span`
-    color: white;
-    background: black;
-    text-align: center;
-    padding: 5px 10px;
-    box-decoration-break: clone;
-`
-
-export const Toggler = styled.div`
-  display: flex;
-  flex-direction: column;
-  padding: 0 5px;
-  margin: 1px;
-  border: 1px solid grey;
-  color: grey;
-  text-align: left;
-  width: auto;
-
-`
+//Form Components
 
 export const InputcontainerRow = styled.div`
     display: flex;
@@ -149,23 +79,71 @@ export const Label = styled.label`
     width: auto;
 `
 
-export const Filterbar = styled.div`
+//Offer Display
+
+export const Card = styled.div`
     display: flex;
-    padding: 10px;
-    margin: 10px;
-    max-height: 100px;
+    flex-direction:column;
+    align-items: left;
+    justify-content: left;
+    width: auto;
+    padding: 0;
+    margin: 25px;
+    background: white;  
+    box-sizing: border-box;
+    box-shadow: 0 15px 25px rgba(0,0,0,.6);
+    border-radius: 10px;
+    color: black;
 `
 
-export const Filtercontainer = styled.div`
-    align-items: center;
-    font-size: 0.75em;
-    padding-right: 1.5625rem;
-    text-align: center;
+export const Cardcontainer = styled.div`
+    display: flex;
+    flex-direction:column;
+    align-items: left;
+    justify-content: left;
+    width: 100%;
+    padding: 0 20px;
+    margin: 0;
+    background: transparent;  
+    box-sizing: border-box;
+    border: none;
+`
+
+export const Button = styled.button`
+  width: 25%;
+  margin: 0 auto;
+  border: none;
+  padding: 5px;
+  margin: 0;
+  background: forestgreen;
+  color: white;
+  font-family: Roboto;
+  font-size: 1.2em;
+  cursor: pointer;
+  text-align: center;
+  vertical-align: middle;
+  border-radius: 10px;
+`
+
+export const Carpic = styled.img`
+    top: 0;
+    left:0;
+    width: 100%;
     height: auto;
-    width: auto;
-    padding-bottom: 0;
-    vertical-align: middle;
-    margin: 10px;
+    border-radius: 10px 10px 0 0;
+    margin: 0;
+    padding:0;
+    z-index: 99;
+`
+
+export const Imgcontainer = styled.div`
+  position: relative;
+  width: 100%;
+  height: auto;
+  padding: 10; 0 0 0;
+  margin: 0;
+  padding: 0px;
+  border-radius: 10px 10px 0 0;  
 `
 
 export const Pricedisplay = styled.div`
@@ -199,44 +177,70 @@ export const Tag = styled.li`
   vertical-align: middle;
 `
 
-export const Button = styled.button`
-  width: 25%;
-  margin: 0 auto;
-  border: none;
-  padding: 5px;
-  margin: 0;
-  background: forestgreen;
+//Headline
+
+export const Headline = styled.h2`
+  display: inline-block;
+  line-height: 150%;
+  text-align: left;
   color: white;
-  font-family: Roboto;
   font-size: 1.2em;
-  cursor: pointer;
-  text-align: center;
-  vertical-align: middle;
-  border-radius: 10px;
-`
-
-export const Carpic = styled.img`
-    top: 0;
-    left:0;
-    width: 100%;
-    height: auto;
-    border-radius: 10px 10px 0 0;
-    margin: 0;
-    padding:0;
-    z-index: 99;
-`
-
-
-
-export const Imgcontainer = styled.div`
-  position: relative;
-  width: 100%;
-  height: auto;
-  padding: 10; 0 0 0;
+  padding: 0;
   margin: 0;
-  padding: 0px;
-  border-radius: 10px 10px 0 0;
-  
+`
+
+export const OfferCardHeadline = styled.h2`
+  position: absolute;
+    top: 20px;
+    left:20px;
+    line-height: 160%;
+    text-align: left;
+    color: white;
+    font-size: 1em;
+    padding: 0;
+    margin:0;
+    margin-right: 20px;
+    z-index: 100;
+`
+
+export const Textwrapper = styled.span`
+    color: white;
+    background: black;
+    text-align: center;
+    padding: 5px 10px;
+    box-decoration-break: clone;
+`
+
+//Functional Elements
+
+export const Toggler = styled.div`
+  display: flex;
+  flex-direction: column;
+  padding: 0 5px;
+  margin: 1px;
+  border: 1px solid grey;
+  color: grey;
+  text-align: left;
+  width: auto;
+  `
+
+export const Filterbar = styled.div`
+    display: flex;
+    padding: 10px;
+    margin: 10px;
+    max-height: 100px;
+`
+
+export const Filtercontainer = styled.div`
+    align-items: center;
+    font-size: 0.75em;
+    padding-right: 1.5625rem;
+    text-align: center;
+    height: auto;
+    width: auto;
+    padding-bottom: 0;
+    vertical-align: middle;
+    margin: 10px;
 `
 
 export const StyledTable = styled.table`

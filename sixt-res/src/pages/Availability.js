@@ -1,4 +1,5 @@
 import './Availability.css'
+import getSixt from '../Services.js'
 import React, { useState, useEffect } from 'react'
 import Offerdataform from '../components/Offerform.js'
 import axios from 'axios'
@@ -94,7 +95,9 @@ export default function Availability() {
             Total Price: {display[index].Total.DueAmount}{' '}
             {display[index].Total.Currency}
           </Pricedisplay>
-          <Button>Rent me</Button>
+          <Button onClick={(e) => {
+      e.preventDefault();
+      window.location.href='/availabilitydetails/' + offer.AvailabilityRow}}>Rent me</Button>
         </Card>
       ))}
     </>
