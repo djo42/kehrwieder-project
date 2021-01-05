@@ -1,6 +1,6 @@
 import React from 'react'
-import './App.css'
-import {Filterbar, Filtercontainer} from './components/Components.js'
+import '../App.css'
+import {Filterbar, Filtercontainer} from './Components.js'
 
 export default function Filters({changeFilter, resetFilter
 }) {

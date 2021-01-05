@@ -1,5 +1,5 @@
 import React from 'react'
-import './App.css'
+import '../App.css'
 import {
   Textwrapper,
   Card,
@@ -11,7 +11,7 @@ import {
   DatetimeInput,
   Input,
   Label,
-} from './components/Components'
+} from '../components/Components'
 
 export default function Offerdataform({ handleClick }) {
   const initialFormData = Object.freeze({

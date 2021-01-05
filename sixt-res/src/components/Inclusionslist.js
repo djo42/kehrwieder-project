@@ -37,7 +37,6 @@ export default function Inclusionslist({ offer }) {
           </Taglist>
         )}
       </Toggler>
-      </Cardcontainer>
-
+    </Cardcontainer>
   )
 }
