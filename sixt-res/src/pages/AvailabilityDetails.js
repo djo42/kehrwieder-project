@@ -28,6 +28,12 @@ export default function AvailabilityDetails() {
   return (
       <>
       <div>{avrw}</div>
+      <form>
+          <input id="name"></input>
+          <input id="lastname"></input>
+          <input id="email"></input>
+          
+      </form>
 
       </>
   )
