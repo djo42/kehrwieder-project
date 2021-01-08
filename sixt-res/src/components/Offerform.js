@@ -31,7 +31,7 @@ export default function Offerdataform({ handleClick }) {
       uci: obj.uci,
       rci: obj.rci,
       age: process.env.REACT_APP_SX_AGE1,
-      kdnr: process.env.REACT_APP_SX_KDNR3,
+      kdnr: process.env.REACT_APP_SX_KDNR1,
       ctyp: 'P',
       wakz: 'KRW',
       posl: 'GB',

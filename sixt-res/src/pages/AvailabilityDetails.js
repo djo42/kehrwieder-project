@@ -1,7 +1,6 @@
 import axios from 'axios'
 import { useState, useEffect } from 'react'
-import { Link, useParams } from 'react-router-dom'
-import {Button} from '../components/Components.js'
+import { useParams } from 'react-router-dom'
 import Reservationform from '../components/Reservationform.js'
 
 export default function AvailabilityDetails() {
@@ -17,7 +16,7 @@ export default function AvailabilityDetails() {
 
   async function callSixt(apiname, parameters) {
     const result = await axios
-      .get(`${process.env.REACT_APP_SX_API}${apiname}${parameters}`)
+      .get(`${`${process.env.REACT_APP_SX_API}${apiname}${parameters}`}&zah=AI`)
       .catch((error) => console.log(error))
 
     //window.sessionStorage.setItem('offer', JSON.stringify(result))
