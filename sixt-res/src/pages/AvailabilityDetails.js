@@ -5,7 +5,7 @@ import Reservationform from '../components/Reservationform.js'
 
 export default function AvailabilityDetails() {
 
-    const [resno, setResno] = useState('0')
+    const [resno, setResno] = useState('')
 
 
   let { avrw } = useParams()
