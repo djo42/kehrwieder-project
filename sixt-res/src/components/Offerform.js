@@ -171,7 +171,7 @@ export default function Offerdataform({ handleClick }) {
         <FormKit
           fields={formGrid}
           submitButton={submitBtnInfo}
-          onSubmit={(event) => console.log(event)}
+          onSubmit={(event) => handleSubmit(event)}
           initialValue={initialState}
         />
       </div>

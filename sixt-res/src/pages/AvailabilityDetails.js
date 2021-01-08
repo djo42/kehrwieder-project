@@ -1,54 +1,40 @@
 import axios from 'axios'
-import { useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import {Button} from '../components/Components.js'
+import Reservationform from '../components/Reservationform.js'
 
 export default function AvailabilityDetails() {
+
+    const [resno, setResno] = useState('0')
+
+
   let { avrw } = useParams()
 
   useEffect(() => {
-    callSixt()
+    //callSixt()
   })
 
-  async function callSixt() {
+  async function callSixt(apiname, parameters) {
     const result = await axios
-      .get(
-        `${
-          process.env.REACT_APP_SX_API +
-          process.env.REACT_APP_SX_AVAILABILITYDETAILS
-        }?avrw=${avrw}`
-      )
+      .get(`${process.env.REACT_APP_SX_API}${apiname}${parameters}`)
       .catch((error) => console.log(error))
 
-    console.log(result)
+    //window.sessionStorage.setItem('offer', JSON.stringify(result))
+
+    localStorage.setItem('reservation', JSON.stringify(result))
+    //window.sessionStorage.removeItem('offer')
+    console.log(localStorage)
+    setResno(result.data.Result.Reservation.Number)
+
   }
 
-  async function callReservation(formData) {
-      
-    /* const result = await axios
-      .get(
-        `${
-          process.env.REACT_APP_SX_API +
-          process.env.REACT_APP_SX_RESERVATION
-        }?avrw=${avrw}`
-      )
-      .catch((error) => console.log(error)) */
-
-    console.log(formData)
-  }
-
-
+  
 
   return (
     <>
-      <div></div>
-      <form onSubmit={(event) => {event.preventDefault(); callReservation(event)}}>
-        <input id="anr" name='anr'></input>
-        <input id="nam2" name='nam2'></input>
-        <input id="nam1" name='nam1'></input>
-        <input id="emai" name='emai'></input>
-        <Button>Rent!</Button>
-      </form>
+      <div>{resno}</div>
+        <Reservationform handleClick={callSixt} avrw={avrw}/>
     </>
   )
 }
