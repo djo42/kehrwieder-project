@@ -1,6 +1,7 @@
 import axios from 'axios'
 import { useEffect } from 'react'
 import { Link, useParams } from 'react-router-dom'
+import {Button} from '../components/Components.js'
 
 export default function AvailabilityDetails() {
   let { avrw } = useParams()
@@ -22,14 +23,31 @@ export default function AvailabilityDetails() {
     console.log(result)
   }
 
+  async function callReservation(formData) {
+      
+    /* const result = await axios
+      .get(
+        `${
+          process.env.REACT_APP_SX_API +
+          process.env.REACT_APP_SX_RESERVATION
+        }?avrw=${avrw}`
+      )
+      .catch((error) => console.log(error)) */
+
+    console.log(formData)
+  }
+
+
+
   return (
     <>
-      <div>{avrw}</div>
-      <form>
-        <input id="name"></input>
-        <input id="lastname"></input>
-        <input id="email"></input>
-        <button></button>
+      <div></div>
+      <form onSubmit={(event) => {event.preventDefault(); callReservation(event)}}>
+        <input id="anr" name='anr'></input>
+        <input id="nam2" name='nam2'></input>
+        <input id="nam1" name='nam1'></input>
+        <input id="emai" name='emai'></input>
+        <Button>Rent!</Button>
       </form>
     </>
   )
