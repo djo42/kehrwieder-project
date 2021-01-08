@@ -1,17 +1,7 @@
 import React from 'react'
-import '../App.css'
-import {
-  Textwrapper,
-  Card,
-  Button,
-  Headline,
-  InputcontainerRow,
-  InputcontainerColumn,
-  BranchInput,
-  DatetimeInput,
-  Input,
-  Label,
-} from '../components/Components'
+import 'bootstrap/dist/css/bootstrap.css'
+import { Textwrapper, Card, Headline } from './Components.js'
+import FormKit from 'react-bootstrap-formkit'
 
 export default function Offerdataform({ handleClick }) {
   const initialFormData = Object.freeze({
@@ -27,13 +17,12 @@ export default function Offerdataform({ handleClick }) {
 
   var date1 = new Date()
   var date2 = new Date()
-  var start = new Date(date1.setDate(date1.getDate() + 30)).toISOString().substr(0,10);
-  var end = new Date(date2.setDate(date2.getDate() + 37)).toISOString().substr(0,10);
-  
-
-  console.log(date2)
-
-  
+  var start = new Date(date1.setDate(date1.getDate() + 30))
+    .toISOString()
+    .substr(0, 10)
+  var end = new Date(date2.setDate(date2.getDate() + 37))
+    .toISOString()
+    .substr(0, 10)
 
   function serialize(obj) {
     var req = {
@@ -71,11 +60,106 @@ export default function Offerdataform({ handleClick }) {
     })
   }
 
-  const handleSubmit = (event) => {
-    event.preventDefault()
+  const handleSubmit = (formData) => {
+    //event.preventDefault()
     console.log(formData)
     serialize(formData)
     // ... submit to API or something
+  }
+
+  let formGrid = [
+    [
+      {
+        type: 'select',
+        label: 'Pick-Up Country',
+        key: '1',
+        id: 'country1',
+        onChange: { handleChange },
+        name: 'country1',
+      },
+      {
+        type: 'select',
+        label: 'Pick-up Branch',
+        key: '2',
+        id: 'uci',
+        onChange: { handleChange },
+        name: 'uci',
+      },
+    ],
+    [
+      {
+        type: 'select',
+        label: 'Return Country',
+        key: '3',
+        id: 'country2',
+        onChange: { handleChange },
+        name: 'country2',
+      },
+      {
+        type: 'select',
+        label: 'Return Branch',
+        key: '4',
+        id: 'rci',
+        onChange: { handleChange },
+        name: 'rci',
+      },
+    ],
+    [
+      {
+        type: 'date',
+        label: 'Pick-up Date',
+        key: '5',
+        id: 'uda',
+        name: 'uda',
+        onChange: { handleChange },
+        required: true,
+      },
+      {
+        type: 'time',
+        label: 'Time',
+        key: '6',
+        id: 'uti',
+        name: 'uti',
+        onChange: { handleChange },
+        required: true,
+      },
+    ],
+    [
+      {
+        type: 'date',
+        label: 'Return Date',
+        key: '7',
+        id: 'rda',
+        name: 'rda',
+        onChange: { handleChange },
+        required: true,
+      },
+      {
+        type: 'time',
+        label: 'Return Time',
+        key: '8',
+        id: 'rti',
+        name: 'rti',
+        onChange: { handleChange },
+        required: true,
+      },
+    ],
+  ]
+
+  let submitBtnInfo = {
+    name: 'Submit',
+    className: 'btn btn-outline-primary btn-md float-right',
+  }
+
+  let initialState = {
+    uda: start,
+    rda: end,
+    uti: "13:00",
+    rti: "13:00",
+    uci: '11',
+    rci: '11',
+    country1: 'Germany',
+    country2: 'Germany',
   }
 
   return (
@@ -83,53 +167,14 @@ export default function Offerdataform({ handleClick }) {
       <Textwrapper>
         <Headline>RENTAL DETAILS</Headline>
       </Textwrapper>
-      <InputcontainerRow>
-        <Input type="checkbox" id="agencypp" name="agencypp" />
-        <Label htmlFor="agencypp">Agency Prepaid</Label>
-      </InputcontainerRow>
-      <InputcontainerColumn>
-        <InputcontainerColumn>
-          <Label htmlFor="cocity">Pick-up branch</Label>
-          <BranchInput
-            id="cocity"
-            name="uci"
-            type="text"
-            onChange={handleChange}
-          />
-        </InputcontainerColumn>
-        <InputcontainerColumn>
-          <Label htmlFor="cicity">Return branch</Label>
-          <BranchInput
-            id="cicity"
-            name="rci"
-            type="text"
-            onChange={handleChange}
-          />
-        </InputcontainerColumn>
-      </InputcontainerColumn>
-
-      <InputcontainerRow>
-        <InputcontainerColumn>
-          <Label htmlFor="codat">Pick-up date</Label>
-          <DatetimeInput id="codat" name="uda" type="date" onChange={handleChange}/>
-        </InputcontainerColumn>
-        <InputcontainerColumn>
-          <Label htmlFor="cotime">Pick-up time</Label>
-          <DatetimeInput id="cotime" name="uti" type="time" onChange={handleChange} />
-        </InputcontainerColumn>
-        </InputcontainerRow>
-        <InputcontainerRow>
-        <InputcontainerColumn>
-          <Label htmlFor="cidat">Return date</Label>
-          <DatetimeInput id="cidat" name="rda" type="date" onChange={handleChange} />
-        </InputcontainerColumn>
-        <InputcontainerColumn>
-          <Label htmlFor="citime">Return time</Label>
-          <DatetimeInput id="citime" name="rti" type="time" onChange={handleChange} />
-        </InputcontainerColumn>
-        </InputcontainerRow>
-
-      <Button onClick={handleSubmit}>Send request</Button>
+      <div className="container">
+        <FormKit
+          fields={formGrid}
+          submitButton={submitBtnInfo}
+          onSubmit={(event) => handleSubmit(event)}
+          initialValue={initialState}
+        />
+      </div>
     </Card>
   )
 }

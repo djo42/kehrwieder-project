@@ -1,5 +1,4 @@
 import './Availability.css'
-import getSixt from '../Services.js'
 import React, { useState, useEffect } from 'react'
 import Offerdataform from '../components/Offerform.js'
 import axios from 'axios'
@@ -27,11 +26,11 @@ export default function Availability() {
       .get(`${process.env.REACT_APP_SX_API}${apiname}${parameters}`)
       .catch((error) => console.log(error))
 
-    window.sessionStorage.setItem('offer', JSON.stringify(result))
+    //window.sessionStorage.setItem('offer', JSON.stringify(result))
 
+    localStorage.setItem('offer', JSON.stringify(result))
+    //window.sessionStorage.removeItem('offer')
     console.log(localStorage)
-    console.log(sessionStorage)
-    console.log(JSON.parse(sessionStorage.offer))
 
     setList(result.data.Result.Offers)
   }
@@ -85,19 +84,22 @@ export default function Availability() {
                 {offer.Car.Examples.join(', ').toUpperCase()}
               </Textwrapper>
             </OfferCardHeadline>
-            <Carpic
-              src={offer.Car.ImageUrl}
-              alt={offer.Car.Examples[0]}
-            />
+            <Carpic src={offer.Car.ImageUrl} alt={offer.Car.Examples[0]} />
           </Imgcontainer>
           <Inclusionslist offer={offer}></Inclusionslist>
           <Pricedisplay>
             Total Price: {display[index].Total.DueAmount}{' '}
             {display[index].Total.Currency}
           </Pricedisplay>
-          <Button onClick={(e) => {
-      e.preventDefault();
-      window.location.href='/availabilitydetails/' + offer.AvailabilityRow}}>Rent me</Button>
+          <Button
+            onClick={(e) => {
+              e.preventDefault()
+              window.location.href =
+                '/availabilitydetails/' + offer.AvailabilityRow
+            }}
+          >
+            Rent me
+          </Button>
         </Card>
       ))}
     </>
