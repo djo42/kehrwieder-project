@@ -28,7 +28,9 @@ export default function Availability() {
 
     //window.sessionStorage.setItem('offer', JSON.stringify(result))
 
-    localStorage.setItem('offer', JSON.stringify(result))
+    //localStorage.setItem('offer', JSON.stringify(result))
+    localStorage.removeItem('offer')
+    //localStorage.removeItem('sxres')
     //window.sessionStorage.removeItem('offer')
     console.log(localStorage)
 

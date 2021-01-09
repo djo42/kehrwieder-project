@@ -2,12 +2,13 @@ import './App.css'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import Availability from './pages/Availability.js'
 import AvailabilityDetails from './pages/AvailabilityDetails.js'
+import Aromanize from "aromanize/base"
 
 
 export default function App() {
   return (
     <>
-    <div>Welcome to the world of Sixt. We hope you will find the rental car of your dreams.</div>
+    <div>{Aromanize.hangulToLatin('희주')}</div>
     <Router>
       <div className="App">
         <main>

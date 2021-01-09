@@ -4,15 +4,12 @@ import { useParams } from 'react-router-dom'
 import Reservationform from '../components/Reservationform.js'
 
 export default function AvailabilityDetails() {
-
-    const [resno, setResno] = useState('')
-
+  const [resno, setResno] = useState([])
 
   let { avrw } = useParams()
 
   useEffect(() => {
-    //callSixt()
-  })
+  }, [resno])
 
   async function callSixt(apiname, parameters) {
     const result = await axios
@@ -21,19 +18,37 @@ export default function AvailabilityDetails() {
 
     //window.sessionStorage.setItem('offer', JSON.stringify(result))
 
-    localStorage.setItem('reservation', JSON.stringify(result))
+    var resarray = JSON.parse(localStorage.getItem('sxres')) || []
+
+    var newres = {'resnr': result.data.Result.Reservation.Number}
+
+    resarray.push(newres)
+
+    localStorage.setItem('sxres', JSON.stringify(resarray))
+    console.log(JSON.parse(localStorage.getItem('sxres')))
+
+    var display = resno
+
+    var reservationnumber = {'resnr': result.data.Result.Reservation.Number}
+
+    console.log(reservationnumber)
+
+    display.push(reservationnumber)
+
+    setResno(display)
+
+    console.log(resno)
+
+/*     localStorage.setItem('reservation', JSON.stringify(result))
     //window.sessionStorage.removeItem('offer')
-    console.log(localStorage)
-    setResno(result.data.Result.Reservation.Number)
-
+    console.log(JSON.parse(localStorage.getItem('reservation')))
+     */
   }
-
-  
 
   return (
     <>
-      <div>{resno}</div>
-        <Reservationform handleClick={callSixt} avrw={avrw}/>
+      <div>{resno.map(e => e.resnr).join(', ')}</div>
+      <Reservationform handleClick={callSixt} avrw={avrw} />
     </>
   )
 }
