@@ -2,6 +2,12 @@ var express = require('express')
 var router = express.Router()
 var base64 = require('base-64')
 var handler = require('./handler.js')
+const mongoose = require('mongoose')
+mongoose.connect(process.env.SX_DB_CONNECT, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+})
+var db = mongoose.connection
 
 require('dotenv').config()
 
@@ -22,6 +28,10 @@ router.get('/:api', async (req, res) => {
   const response = await handler
     .apicall(endpoint, basicauth)
     .catch((error) => console.log(error))
+
+  if (req.params['api'] === 'reservation') {
+    db.collection('reservation').insertOne(response.data)
+  }
 
   res.setHeader('Content-Type', 'application/json')
   res.setHeader('Access-Control-Allow-Origin', '*')
