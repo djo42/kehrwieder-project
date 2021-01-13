@@ -1,6 +1,6 @@
 import React from 'react'
-import 'bootstrap/dist/css/bootstrap.css'
-import { Textwrapper, Card, Headline } from './Components.js'
+import { Textwrapper, Headline } from './Components.js'
+import { Button, Card } from 'react-bootstrap'
 import FormKit from 'react-bootstrap-formkit'
 
 export default function Reservationform({ handleClick, avrw }) {
@@ -107,13 +107,15 @@ export default function Reservationform({ handleClick, avrw }) {
     anr: '1',
     nam1: 'John',
     nam2: 'Dennis',
-    emai: "dennis.john@kehrwieder.co.kr",
+    emai: 'dennis.john@kehrwieder.co.kr',
   }
+
+
 
   return (
     <Card>
       <Textwrapper>
-        <Headline>RENTAL DETAILS</Headline>
+        <Headline>ENTER RENTER DETAILS</Headline>
       </Textwrapper>
       <div className="container">
         <FormKit

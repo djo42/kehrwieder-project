@@ -1,5 +1,25 @@
 import styled from 'styled-components'
 
+export const Header = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 2.5em;
+  background: white;
+  align-items: center;
+  align-text: right;
+  justify-items: middle;
+  z-index: 100;
+`
+
+export const Main = styled.main`
+  position: relative;
+  width: 100%;
+  z-index: 90;
+`
+
+
 //Form Components
 
 export const InputcontainerRow = styled.div`

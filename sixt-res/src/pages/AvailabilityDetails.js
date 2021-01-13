@@ -1,7 +1,11 @@
 import axios from 'axios'
+import './AvailabilityDetails.css'
+import 'bootstrap/dist/css/bootstrap.min.css'
 import { useState, useEffect } from 'react'
-import { useParams } from 'react-router-dom'
 import Reservationform from '../components/Reservationform.js'
+
+import { useParams } from 'react-router-dom'
+
 
 export default function AvailabilityDetails() {
   const [resno, setResno] = useState([])
@@ -47,8 +51,8 @@ export default function AvailabilityDetails() {
 
   return (
     <>
-      <div>{resno.map(e => e.resnr).join(', ')}</div>
-      <Reservationform handleClick={callSixt} avrw={avrw} />
+      {/* <div>{resno.map(e => e.resnr).join(', ')}</div> */}
+      <Reservationform className="auto-width" handleClick={callSixt} avrw={avrw} />
     </>
   )
 }

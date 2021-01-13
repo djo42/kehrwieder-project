@@ -1,9 +1,11 @@
 body {
   display:flex;
   margin:0 auto; 
-  padding: 0;
+  padding: 25px;
+  padding-top: 3em;
   background: #ff5f00 !important;
-  max-width: 600px;  
+  max-width: 600px;
+  width: 100%;  
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;

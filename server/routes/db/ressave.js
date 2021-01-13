@@ -2,7 +2,7 @@ var express = require('express')
 var router = express.Router()
 require('dotenv').config()
 
-router.get('/', async (req, res) => {
+router.post('/', async (req, res) => {
   const MongoClient = require('mongodb').MongoClient
 
   MongoClient.connect(process.env.SX_DB_CONNECT, (err, client) => {

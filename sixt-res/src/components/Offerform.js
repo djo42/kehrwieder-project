@@ -1,6 +1,6 @@
 import React from 'react'
-import 'bootstrap/dist/css/bootstrap.css'
-import { Textwrapper, Card, Headline } from './Components.js'
+import { Textwrapper, Headline } from './Components.js'
+import { Button, Card } from 'react-bootstrap'
 import FormKit from 'react-bootstrap-formkit'
 
 export default function Offerdataform({ handleClick }) {

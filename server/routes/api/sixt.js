@@ -3,11 +3,6 @@ var router = express.Router()
 var base64 = require('base-64')
 var handler = require('./handler.js')
 const mongoose = require('mongoose')
-mongoose.connect(process.env.SX_DB_CONNECT, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-})
-var db = mongoose.connection
 
 require('dotenv').config()
 
@@ -30,7 +25,70 @@ router.get('/:api', async (req, res) => {
     .catch((error) => console.log(error))
 
   if (req.params['api'] === 'reservation') {
+    /*     await mongoose
+      .connect(process.env.SX_DB_CONNECT, {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+      }) */
+    const resdata = await {
+      resn: response.data.Result.Reservation.Number,
+      secu: response.data.Result.Reservation.SecurityCode,
+      rate: response.data.Result.Reservation.Rate.Code,
+      ctyp: response.data.Result.Reservation.Car.Group,
+      rate: response.data.Result.Reservation.Rate.Code,
+      pric: response.data.Result.Reservation.Total.DueAmount,
+      curr: response.data.Result.Reservation.Total.Currency,
+    }
+
+    mongoose
+      .connect(process.env.SX_DB_CONNECT, {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+      })
+      .catch((error) => console.log(error))
+
+    const db = mongoose.connection
+    db.on('error', console.error.bind(console, 'connection error:'))
+    db.once('open', () => {
+      console.log('we are connected!')
+    })
     db.collection('reservation').insertOne(response.data)
+    db.collection('reservation1').insertOne(resdata)
+
+/*     db.close(function () {
+      process.exit(0)
+    }) */
+
+    /*     mongoose
+      .connect(process.env.SX_DB_CONNECT, {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+      })
+      .then(
+        (db) => {
+          db.collection('reservation').insertOne(response.data)
+        },
+        (err) => {
+          console.log(err)
+        }
+      ) */
+
+    /*     try {
+      await mongoose.connect(process.env.SX_DB_CONNECT, {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+      })
+    } catch (error) {
+      console.log(error)
+    } */
+
+    /*     const db = mongoose.connection
+    db.on('error', console.error.bind(console, 'connection error:'))
+    db.once('open', () => {
+      console.log('we are connected!')
+    })
+
+    db.collection('reservation').insertOne(response.data) */
   }
 
   res.setHeader('Content-Type', 'application/json')
