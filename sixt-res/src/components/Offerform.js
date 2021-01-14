@@ -1,5 +1,10 @@
 import React from 'react'
-import { Textwrapper, Headline } from './Components.js'
+import {
+  Formcontainer,
+  Headlinewrapper,
+  Textwrapper,
+  Headline,
+} from './Components.js'
 import { Button, Card } from 'react-bootstrap'
 import FormKit from 'react-bootstrap-formkit'
 
@@ -71,14 +76,6 @@ export default function Offerdataform({ handleClick }) {
     [
       {
         type: 'select',
-        label: 'Pick-Up Country',
-        key: '1',
-        id: 'country1',
-        onChange: { handleChange },
-        name: 'country1',
-      },
-      {
-        type: 'select',
         label: 'Pick-up Branch',
         key: '2',
         id: 'uci',
@@ -87,14 +84,6 @@ export default function Offerdataform({ handleClick }) {
       },
     ],
     [
-      {
-        type: 'select',
-        label: 'Return Country',
-        key: '3',
-        id: 'country2',
-        onChange: { handleChange },
-        name: 'country2',
-      },
       {
         type: 'select',
         label: 'Return Branch',
@@ -154,8 +143,8 @@ export default function Offerdataform({ handleClick }) {
   let initialState = {
     uda: start,
     rda: end,
-    uti: "13:00",
-    rti: "13:00",
+    uti: '13:00',
+    rti: '13:00',
     uci: '11',
     rci: '11',
     country1: 'Germany',
@@ -164,17 +153,21 @@ export default function Offerdataform({ handleClick }) {
 
   return (
     <Card>
-      <Textwrapper>
-        <Headline>RENTAL DETAILS</Headline>
-      </Textwrapper>
-      <div className="container">
-        <FormKit
-          fields={formGrid}
-          submitButton={submitBtnInfo}
-          onSubmit={(event) => handleSubmit(event)}
-          initialValue={initialState}
-        />
-      </div>
+      <Headlinewrapper>
+        <Textwrapper>
+          <Headline>RENTAL DETAILS</Headline>
+        </Textwrapper>
+      </Headlinewrapper>
+      <Formcontainer>
+        <div className="container">
+          <FormKit
+            fields={formGrid}
+            submitButton={submitBtnInfo}
+            onSubmit={(event) => handleSubmit(event)}
+            initialValue={initialState}
+          />
+        </div>
+      </Formcontainer>
     </Card>
   )
 }

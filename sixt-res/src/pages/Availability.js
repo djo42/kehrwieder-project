@@ -98,7 +98,7 @@ export default function Availability() {
               {display[index].Total.Currency}
             </Card.Text>
             <Button
-              variant="outline-primary"
+              variant="success"
               onClick={(e) => {
                 e.preventDefault()
                 window.location.href =

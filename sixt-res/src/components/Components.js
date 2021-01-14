@@ -1,12 +1,13 @@
 import styled from 'styled-components'
 
-export const Header = styled.div`
+export const Header = styled.header`
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 2.5em;
   background: white;
+  box-shadow: 0px 5px 5px #27272780;
   align-items: center;
   align-text: right;
   justify-items: middle;
@@ -17,6 +18,14 @@ export const Main = styled.main`
   position: relative;
   width: 100%;
   z-index: 90;
+`
+
+export const Formcontainer = styled.div`
+  padding: 15px 0;
+`
+
+export const Headlinewrapper = styled.div`
+  padding: 15px;
 `
 
 
