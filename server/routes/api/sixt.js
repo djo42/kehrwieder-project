@@ -53,7 +53,7 @@ router.get('/:api', async (req, res) => {
       console.log('we are connected!')
     })
     db.collection('reservation').insertOne(response.data)
-    db.collection('reservation1').insertOne(resdata)
+    /* db.collection('reservation1').insertOne(resdata) */
 
 /*     db.close(function () {
       process.exit(0)
