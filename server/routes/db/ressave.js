@@ -17,20 +17,19 @@ router.get('/', async (req, res) => {
     console.log('we are connected!')
   })
 
-  db.collection('cities').find(
+  db.collection('shortcities').find(
     {},
-    { limit: 100, projection: { Name: 1 } },
     async function (err, result) {
       if (err) {
         console.log(err)
       } else {
         array = await result.toArray()
         console.log(array)
-        var arrayToString = JSON.stringify(Object.assign([], array)) // convert array to string
-        var stringToJsonObject = JSON.parse(arrayToString) // convert string to json object
+        var obj = JSON.stringify(Object.assign([], array)) // convert array to string
+        var shortcities = JSON.parse(obj) // convert string to json object
         res.setHeader('Content-Type', 'application/json')
         res.setHeader('Access-Control-Allow-Origin', '*')
-        res.json(stringToJsonObject)
+        res.json(shortcities)
       }
     }
   )

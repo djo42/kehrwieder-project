@@ -41,7 +41,7 @@ export default function Offerdataform({ handleClick }) {
       wakz: 'KRW',
       posl: 'GB',
     }
-    console.log(req)
+    //console.log(req)
 
     var str = []
     for (var p in req)
@@ -51,7 +51,7 @@ export default function Offerdataform({ handleClick }) {
 
     const querystr = '?' + str.join('&')
 
-    console.log('availability' + querystr)
+    //console.log('availability' + querystr)
 
     handleClick('availability', querystr)
   }

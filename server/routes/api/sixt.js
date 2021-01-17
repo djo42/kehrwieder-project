@@ -25,11 +25,6 @@ router.get('/:api', async (req, res) => {
     .catch((error) => console.log(error))
 
   if (req.params['api'] === 'reservation') {
-    /*     await mongoose
-      .connect(process.env.SX_DB_CONNECT, {
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
-      }) */
     const resdata = await {
       resn: response.data.Result.Reservation.Number,
       secu: response.data.Result.Reservation.SecurityCode,
@@ -50,45 +45,9 @@ router.get('/:api', async (req, res) => {
     const db = mongoose.connection
     db.on('error', console.error.bind(console, 'connection error:'))
     db.once('open', () => {
-      console.log('we are connected!')
+      console.log('db connection estabished')
     })
     db.collection('reservation').insertOne(response.data)
-    /* db.collection('reservation1').insertOne(resdata) */
-
-/*     db.close(function () {
-      process.exit(0)
-    }) */
-
-    /*     mongoose
-      .connect(process.env.SX_DB_CONNECT, {
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
-      })
-      .then(
-        (db) => {
-          db.collection('reservation').insertOne(response.data)
-        },
-        (err) => {
-          console.log(err)
-        }
-      ) */
-
-    /*     try {
-      await mongoose.connect(process.env.SX_DB_CONNECT, {
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
-      })
-    } catch (error) {
-      console.log(error)
-    } */
-
-    /*     const db = mongoose.connection
-    db.on('error', console.error.bind(console, 'connection error:'))
-    db.once('open', () => {
-      console.log('we are connected!')
-    })
-
-    db.collection('reservation').insertOne(response.data) */
   }
 
   res.setHeader('Content-Type', 'application/json')

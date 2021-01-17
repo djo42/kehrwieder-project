@@ -5,7 +5,7 @@ var base64 = require('base-64')
 var handler = require('./api/handler.js')
 const mongoose = require('mongoose')
 
-var j = schedule.scheduleJob('* 0 3 * * 0', async function () {
+var j = schedule.scheduleJob('0 2 * * SUN', async function () {
   const basicauth = `Basic ${base64.encode(
     `${process.env.SX_BASIC_USER}:${process.env.SX_BASIC_PASS}`
   )}`
@@ -48,7 +48,7 @@ var j = schedule.scheduleJob('* 0 3 * * 0', async function () {
   })
   db.collection('cities').find(
     {},
-    { projection: { Name: 1, StationID: 1 } },
+    { projection: { Name: 1, StationID: 1, "Address.Country": 1 } },
     async function (err, result) {
       if (err) {
         console.log(err)

@@ -15,6 +15,8 @@ import {
 } from '../components/Components.js'
 //import Button from '@material-ui/core/Button'
 import Container from '@material-ui/core/Container'
+import { Typeahead } from 'react-bootstrap-typeahead';
+import 'react-bootstrap-typeahead/css/Typeahead.css';
 
 export default function Availability() {
   const [list, setList] = useState([])
