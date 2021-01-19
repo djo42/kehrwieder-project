@@ -4,7 +4,7 @@ import Availability from './pages/Availability.js'
 import AvailabilityDetails from './pages/AvailabilityDetails.js'
 import Autofillform from './pages/Formtest.js'
 import Aromanize from 'aromanize/base'
-import { Header, Main } from './components/Components.js'
+import { Header, Main} from './components/Components.js'
 import { slide as Menu } from 'react-burger-menu'
 import { logRoles } from '@testing-library/react'
 import logo from "./files/logo.png"
@@ -13,7 +13,6 @@ export default function App() {
   return (
     <>
       {/* <div>{Aromanize.hangulToLatin('희주')}</div> */}
-      <Router>
       <Header>
         <Menu width={280}>
           <a id="home" className="menu-item" href="/">
@@ -26,9 +25,9 @@ export default function App() {
             Formtest
           </a>
         </Menu>
-        <img src={logo} className="logo"/>
-               
+        <img src={logo} className="logo"/>               
       </Header>
+      <Router>
           <Main>
             <Switch>
               <Route path="/availability">

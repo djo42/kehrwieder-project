@@ -6,6 +6,7 @@ module.exports = {
   apicall: async function apicall(url, login) {
     const feedback = await axios
       .get(url, {
+        timeout: 120000,
         headers: {
           Authorization: login,
         },

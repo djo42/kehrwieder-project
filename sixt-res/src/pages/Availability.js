@@ -84,7 +84,7 @@ export default function Availability() {
       <Offerdataform handleClick={callSixt} />
       <Filters changeFilter={changeFilter} resetFilter={resetFilter} />
       {display.map((offer, index) => (
-        <Card className="margin-card" key={offer.AvailabilityRow} {...offer}>
+        <Card className="margin-padding-card" key={offer.AvailabilityRow} {...offer}>
           <Card.Img
             variant="top"
             src={offer.Car.ImageUrl}

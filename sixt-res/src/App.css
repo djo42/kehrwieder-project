@@ -34,8 +34,9 @@
   z-index: 80;
 }
 
-.margin-card {
+.margin-padding-card {
   margin-bottom: 20px;
+  padding: 10px;
 }
 
 
