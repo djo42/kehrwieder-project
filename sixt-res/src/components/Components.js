@@ -236,6 +236,9 @@ export const Textwrapper = styled.span`
     color: white;
     background: black;
     text-align: center;
+    vertical-align:middle;
+    line-height: 1.5rem;
+    font-size: 1.25rem;
     padding: 5px 10px;
     box-decoration-break: clone;
 `

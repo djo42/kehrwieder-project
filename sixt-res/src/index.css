@@ -1,6 +1,6 @@
 body {
   display:flex;
-  margin:0 auto; 
+  margin:0 auto !important; 
   padding: 25px;
   padding-top: 4em;
   background: #ff5f00 !important;

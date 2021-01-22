@@ -7,12 +7,18 @@
 
 .App {
   text-align: left;
-  width: 100%; 
+  width: 100%;
+
+}
+
+.main {
+  margin:auto; 
 }
 
 #root {
   width: 100%;
   max-width: 600px;
+  margin: 0 auto;
 }
 
 .logo {
@@ -24,6 +30,11 @@
   right: 0;  
   margin: auto;
   padding-right: 10px;
+}
+
+
+.margin-bottom-20 {
+  margin-bottom: 20px 0;
 }
 
 

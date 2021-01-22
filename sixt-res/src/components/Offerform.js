@@ -1,4 +1,5 @@
 import axios from 'axios'
+import '../App.css'
 import React, { useEffect, useState } from 'react'
 import { Card } from 'react-bootstrap'
 import { Typeahead } from 'react-bootstrap-typeahead'
@@ -100,118 +101,129 @@ export default function Offerdataform({ handleClick }) {
 
   return (
     <>
-      <Card className="margin-padding-card">
-        <form onSubmit={(e) => handleSubmit(e)}>
-          <div class="form-group">
-            <label htmlFor="uci">Check-out Branch</label>
-            <Typeahead
-              single
-              clearButton
-              id="uci"
-              name="uci"
-              onChange={(e) => {
-                if (e[0] === undefined || null) {
-                } else {
-                  const f = 'uci'
-                  handleBranchChange(e, f)
+      <Card>
+        <Card.Body>
+          <Card.Title>Request Form</Card.Title>
+          <form onSubmit={(e) => handleSubmit(e)}>
+            <div class="form-group">
+              <label htmlFor="uci">Check-out Branch</label>
+              <Typeahead
+                single
+                clearButton
+                id="uci"
+                name="uci"
+                onChange={(e) => {
+                  if (e[0] === undefined || null) {
+                  } else {
+                    const f = 'uci'
+                    handleBranchChange(e, f)
+                  }
+                }}
+                options={branches}
+                labelKey={(option) =>
+                  `${option.Name} (${option.Address.Country})`
                 }
-              }}
-              options={branches}
-              labelKey={(option) =>
-                `${option.Name} (${option.Address.Country})`
-              }
-              size="default"
-              minLength="3"
-              placeholder="Check-out branch"
-              required={true}
-            />
-          </div>
-          <div class="form-group">
-            <label htmlFor="rci">Return Branch</label>
-            <Typeahead
-              single
-              clearButton
-              id="rci"
-              name="rci"
-              onChange={(e) => {
-                if (e[0] === undefined || null) {
-                } else {
-                  const f = "rci"
-                  handleBranchChange(e, f)
+                size="default"
+                minLength="3"
+                placeholder="Check-out branch"
+                required={true}
+              />
+            </div>
+            <div class="form-group">
+              <label htmlFor="rci">Return Branch</label>
+              <Typeahead
+                single
+                clearButton
+                id="rci"
+                name="rci"
+                onChange={(e) => {
+                  if (e[0] === undefined || null) {
+                  } else {
+                    const f = 'rci'
+                    handleBranchChange(e, f)
+                  }
+                }}
+                options={branches}
+                labelKey={(option) =>
+                  `${option.Name} (${option.Address.Country})`
                 }
+                size="default"
+                minLength="3"
+                placeholder="Return branch"
+                required={true}
+              />
+            </div>
+            <div class="form-row">
+              <div class="form-group col">
+                <label htmlFor="uda">Check-out date</label>
+                <input
+                  class="form-control"
+                  type="date"
+                  label="Pick-up Date"
+                  key="5"
+                  id="uda"
+                  name="uda"
+                  onChange={handleChange}
+                  required={true}
+                  placeholder="Check-out date"
+                />
+              </div>
+              <div class="form-group col">
+                <label htmlFor="uti">Time</label>
+                <input
+                  class="form-control"
+                  type="time"
+                  label="Pick-up Time"
+                  key="5"
+                  id="uti"
+                  name="uti"
+                  onChange={handleChange}
+                  required={true}
+                />
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group col">
+                <label htmlFor="uda">Return date</label>
+                <input
+                  class="form-control"
+                  type="date"
+                  label="Return Date"
+                  key="5"
+                  id="rda"
+                  name="rda"
+                  onChange={handleChange}
+                  required={true}
+                  placeholder="Return date"
+                />
+              </div>
+              <div class="form-group col">
+                <label htmlFor="rti">Time</label>
+                <input
+                  class="form-control"
+                  type="time"
+                  label="Return Time"
+                  key="5"
+                  id="rti"
+                  name="rti"
+                  onChange={handleChange}
+                  required={true}
+                />
+              </div>
+            </div>
+            <button
+              type="button"
+              class="btn btn-success"
+              onClick={(e) => {
+                e.preventDefault()
+                console.log(e)
+                handleSubmit(formData)
               }}
-              options={branches}
-              labelKey={(option) =>
-                `${option.Name} (${option.Address.Country})`
-              }
-              size="default"
-              minLength="3"
-              placeholder="Return branch"
-              required={true}
-            />
-          </div>
-          <div class="form-row">
-            <div class="form-group col">
-              <label htmlFor="uda">Check-out date</label>
-              <input
-                class="form-control"
-                type="date"
-                label="Pick-up Date"
-                key="5"
-                id="uda"
-                name="uda"
-                onChange={handleChange}
-                required={true}
-                placeholder="Check-out date"
-              />
-            </div>
-            <div class="form-group col">
-              <label htmlFor="uti">Time</label>
-              <input
-                class="form-control"
-                type="time"
-                label="Pick-up Time"
-                key="5"
-                id="uti"
-                name="uti"
-                onChange={handleChange}
-                required={true}
-              />
-            </div>
-          </div>
-          <div class="form-row">
-            <div class="form-group col">
-              <label htmlFor="uda">Return date</label>
-              <input
-                class="form-control"
-                type="date"
-                label="Return Date"
-                key="5"
-                id="rda"
-                name="rda"
-                onChange={handleChange}
-                required={true}
-                placeholder="Return date"
-              />
-            </div>
-            <div class="form-group col">
-              <label htmlFor="rti">Time</label>
-              <input
-                class="form-control"
-                type="time"
-                label="Return Time"
-                key="5"
-                id="rti"
-                name="rti"
-                onChange={handleChange}
-                required={true}
-              />
-            </div>
-          </div>
-          <button onClick={(e) => {e.preventDefault(); console.log(e); handleSubmit(formData)}} class="btn btn-primary">
-            Submit
-          </button>
-        </form>
+            >
+              Submit
+            </button>
+          </form>
+        </Card.Body>
       </Card>
     </>
   )

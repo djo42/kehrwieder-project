@@ -1,22 +1,12 @@
-import './Availability.css'
-import { Button, Card } from 'react-bootstrap'
-import 'bootstrap/dist/css/bootstrap.min.css'
-import React, { useState, useEffect } from 'react'
-import Offerdataform from '../components/Offerform.js'
 import axios from 'axios'
+import 'bootstrap/dist/css/bootstrap.min.css'
+import React, { useEffect, useState } from 'react'
+import { Button, Card, ListGroupItem } from 'react-bootstrap'
+import 'react-bootstrap-typeahead/css/Typeahead.css'
 import Filters from '../components/Filters.js'
 import Inclusionslist from '../components/Inclusionslist.js'
-import {
-  OfferCardHeadline,
-  Pricedisplay,
-  Carpic,
-  Textwrapper,
-  Imgcontainer,
-} from '../components/Components.js'
-//import Button from '@material-ui/core/Button'
-import Container from '@material-ui/core/Container'
-import { Typeahead } from 'react-bootstrap-typeahead';
-import 'react-bootstrap-typeahead/css/Typeahead.css';
+import Offerdataform from '../components/Offerform.js'
+import './Availability.css'
 
 export default function Availability() {
   const [list, setList] = useState([])
@@ -84,7 +74,7 @@ export default function Availability() {
       <Offerdataform handleClick={callSixt} />
       <Filters changeFilter={changeFilter} resetFilter={resetFilter} />
       {display.map((offer, index) => (
-        <Card className="margin-padding-card" key={offer.AvailabilityRow} {...offer}>
+        <Card className="margin-bottom-20" key={offer.AvailabilityRow} {...offer}>
           <Card.Img
             variant="top"
             src={offer.Car.ImageUrl}
