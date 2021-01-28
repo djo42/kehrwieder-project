@@ -20,6 +20,8 @@ router.get('/:api', async (req, res) => {
     process.env.SX_API_URL + req.params['api']
   }_2.01.json${parameters.replace('?', '?' + apiuser + '&')}&language=en_US`
 
+  console.log(endpoint)
+
   const response = await handler
     .apicall(endpoint, basicauth)
     .catch((error) => console.log(error))

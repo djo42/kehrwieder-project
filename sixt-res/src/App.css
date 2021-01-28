@@ -4,11 +4,52 @@
 }
 
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300;400&display=swap');
 
 .App {
   text-align: left;
   width: 100%;
 
+}
+
+.lbl-form {
+  font-family: "Roboto Condensed";
+  font-size: 12pt !important;
+  font-weight: bold;
+  color: purple;
+  margin-top: 12px;
+  padding:0 !important;
+}
+
+.hdl-tbl {
+  font-family: "Roboto Condensed";
+  font-size: 12pt !important;
+  font-weight: bold;
+  color: purple;
+  margin:0;
+  padding: 10px 0 !important;
+}
+
+.tbl-cell{
+  font-size: 12pt;
+  font-family: "Roboto Condensed";
+  padding: 4px !important;
+}
+
+.spinner {
+  position: absolute;
+  top: 30%;
+  color: purple;
+}
+
+
+
+.txt-align-right {
+  text-align: right;
+}
+
+.txt-align-left {
+  text-align: left;
 }
 
 .main {
@@ -153,7 +194,7 @@ Note: Beware of modifying this element as it can break the animations - you shou
 /* General sidebar styles */
 .bm-menu {
   background: #373a47;
-  opacity:75%;
+  opacity:100%;
   padding: 2.5em 1.5em 0;
   font-size: 1.15em;
 }

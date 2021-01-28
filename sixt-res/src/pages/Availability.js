@@ -1,7 +1,7 @@
 import axios from 'axios'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import React, { useEffect, useState } from 'react'
-import { Button, Card, ListGroupItem } from 'react-bootstrap'
+import { Button, Card } from 'react-bootstrap'
 import 'react-bootstrap-typeahead/css/Typeahead.css'
 import Filters from '../components/Filters.js'
 import Inclusionslist from '../components/Inclusionslist.js'
@@ -12,6 +12,7 @@ export default function Availability() {
   const [list, setList] = useState([])
   const [display, setDisplay] = useState([])
   const [filter, setFilter] = useState({})
+  const [total, setTotal] = useState()
 
   //Call the API
 
@@ -42,7 +43,6 @@ export default function Availability() {
   function resetFilter() {
     setFilter({})
     setDisplay(list)
-    console.log('Display: ' + display)
   }
 
   function applyFilter() {
@@ -53,7 +53,6 @@ export default function Availability() {
       }
       return true
     })
-    console.log(filtered)
     setDisplay(filtered)
   }
 
@@ -64,17 +63,19 @@ export default function Availability() {
     acfilt ? delete carfeatures[feature] : (carfeatures[feature] = true)
 
     setFilter(carfeatures)
-    console.log(filter)
     applyFilter()
   }
 
   return (
     <>
-
       <Offerdataform handleClick={callSixt} />
       <Filters changeFilter={changeFilter} resetFilter={resetFilter} />
       {display.map((offer, index) => (
-        <Card className="margin-bottom-20" key={offer.AvailabilityRow} {...offer}>
+        <Card
+          className="margin-bottom-20"
+          key={offer.AvailabilityRow}
+          {...offer}
+        >
           <Card.Img
             variant="top"
             src={offer.Car.ImageUrl}

@@ -4,6 +4,7 @@ import {Filterbar, Filtercontainer} from './Components.js'
 
 export default function Filters({changeFilter, resetFilter
 }) {
+  console.log('filtertest: ' + typeof changeFilter)
   return (
     <>
       <Filterbar>

@@ -1,10 +1,10 @@
 import axios from 'axios'
-import './AvailabilityDetails.css'
 import 'bootstrap/dist/css/bootstrap.min.css'
-import { useState, useEffect } from 'react'
-import Reservationform from '../components/Reservationform.js'
-
+import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
+import Reservationform from '../components/Reservationform.js'
+import './AvailabilityDetails.css'
+
 
 
 export default function AvailabilityDetails() {

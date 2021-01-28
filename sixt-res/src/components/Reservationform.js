@@ -1,7 +1,7 @@
 import React from 'react'
-import { Textwrapper, Headline } from './Components.js'
-import { Button, Card } from 'react-bootstrap'
+import { Card } from 'react-bootstrap'
 import FormKit from 'react-bootstrap-formkit'
+import { Headline, Textwrapper } from './Components.js'
 
 export default function Reservationform({ handleClick, avrw }) {
   const initialFormData = Object.freeze({

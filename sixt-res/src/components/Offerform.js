@@ -106,7 +106,7 @@ export default function Offerdataform({ handleClick }) {
           <Card.Title>Request Form</Card.Title>
           <form onSubmit={(e) => handleSubmit(e)}>
             <div class="form-group">
-              <label htmlFor="uci">Check-out Branch</label>
+              <label class="lbl-form" htmlFor="uci">Check-out Branch</label>
               <Typeahead
                 single
                 clearButton
@@ -130,7 +130,7 @@ export default function Offerdataform({ handleClick }) {
               />
             </div>
             <div class="form-group">
-              <label htmlFor="rci">Return Branch</label>
+              <label class="lbl-form" htmlFor="rci">Return Branch</label>
               <Typeahead
                 single
                 clearButton
@@ -155,7 +155,7 @@ export default function Offerdataform({ handleClick }) {
             </div>
             <div class="form-row">
               <div class="form-group col">
-                <label htmlFor="uda">Check-out date</label>
+                <label class="lbl-form" htmlFor="uda">Check-out date</label>
                 <input
                   class="form-control"
                   type="date"
@@ -169,7 +169,7 @@ export default function Offerdataform({ handleClick }) {
                 />
               </div>
               <div class="form-group col">
-                <label htmlFor="uti">Time</label>
+                <label class="lbl-form" htmlFor="uti">Time</label>
                 <input
                   class="form-control"
                   type="time"
@@ -184,7 +184,7 @@ export default function Offerdataform({ handleClick }) {
             </div>
             <div class="form-row">
               <div class="form-group col">
-                <label htmlFor="uda">Return date</label>
+                <label class="lbl-form" htmlFor="uda">Return date</label>
                 <input
                   class="form-control"
                   type="date"
@@ -198,7 +198,7 @@ export default function Offerdataform({ handleClick }) {
                 />
               </div>
               <div class="form-group col">
-                <label htmlFor="rti">Time</label>
+                <label class="lbl-form" htmlFor="rti">Time</label>
                 <input
                   class="form-control"
                   type="time"
@@ -210,6 +210,29 @@ export default function Offerdataform({ handleClick }) {
                   required={true}
                 />
               </div>
+            </div>
+            <label class="my-1 mr-2 lbl-form" for="inlineFormCustomSelectPref">
+                Please choose your rate
+            </label>
+            <select
+              class="custom-select my-1 mr-sm-2"
+              id="inlineFormCustomSelectPref"
+            >
+              <option selected>Choose...</option>
+              <option value="1">One</option>
+              <option value="2">Two</option>
+              <option value="3">Three</option>
+            </select>
+
+            <div class="custom-control custom-checkbox my-1 mr-sm-2">
+              <input
+                type="checkbox"
+                class="custom-control-input"
+                id="customControlInline"
+              />
+              <label class="custom-control-label lbl-form" for="customControlInline">
+                Remember my preference
+              </label>
             </div>
             <button
               type="button"

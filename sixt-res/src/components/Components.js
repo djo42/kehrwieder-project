@@ -247,13 +247,19 @@ export const Textwrapper = styled.span`
 
 export const Toggler = styled.div`
   display: flex;
+  position: relative;
   flex-direction: column;
-  padding: 0 5px;
+  padding: 6px;
   margin: 1px;
-  border: 1px solid grey;
+  border: 0.5px solid silver;
+  background: #F8F8F8;
   color: grey;
   text-align: left;
+  vertical-align:middle;
+  align-elements: center;
   width: auto;
+  border-radius: 5px;
+  min-height: 38px;
   `
 
 export const Filterbar = styled.div`
