@@ -279,29 +279,6 @@ export default function Offerdataform({ handleClick }) {
               ))}
               <option value={'other'}>Other Corporate Rate</option>
             </select>
-{/*             <select
-              class={addProducts ? 'custom-select my-1 mr-sm-2' : 'hidden'}
-              id="kdnr"
-              name="kdnr"
-              onChange={(e) => {
-                console.log(e)
-                e.preventDefault()
-                handleChange(e.target.name, e.target.value)
-              }}
-            >
-              <option selected>Choose...</option>
-              {companies.map((company, index) => (
-                <option
-                  value={company.KDNR}
-                  key={index}
-                  id={company._id}
-                  {...company}
-                >
-                  {company.Name1}
-                </option>
-              ))}
-            </select> */}
-
             <Typeahead
               single
               clearButton
