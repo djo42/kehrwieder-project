@@ -8,7 +8,8 @@ var indexRouter = require('./routes/index')
 var sixtRouter = require('./routes/api/sixt')
 var sixtdocRouter = require('./routes/api/sixtdocs')
 var fxratesRouter = require('./routes/api/fxrates')
-var dbRouter = require('./routes/db/ressave.js')
+var dbRouterCities = require('./routes/db/ressave.js')
+var dbRouterCompanies = require('./routes/db/corpdata.js')
 
 var app = express()
 
@@ -26,7 +27,8 @@ app.use('/', indexRouter)
 app.use('/api/sixt', sixtRouter)
 app.use('/api/sixtdocs', sixtdocRouter)
 app.use('/api/fx', fxratesRouter)
-app.use('/db', dbRouter)
+app.use('/db', dbRouterCities)
+app.use('/db/companies', dbRouterCompanies)
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

@@ -85,7 +85,14 @@ export default function Inclusionslist({ offer }) {
                 </tr>
               )
             })}
-            <th class="hdl-tbl" colspan="3">
+            <th
+              class={
+                resdetails.Result.Extras.Included.length === 0
+                  ? 'hidden'
+                  : 'hdl-tbl'
+              }
+              colspan="3"
+            >
               Included Extras
             </th>
             {resdetails.Result.Extras.Included.map((item, index) => {

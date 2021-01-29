@@ -12,13 +12,19 @@ export default function Offerdataform({ handleClick }) {
     rci: '',
     rti: '',
     rda: '',
+    kdnr: '',
   })
+
+  const products = JSON.parse(process.env.REACT_APP_PRODUCTS)
 
   const [formData, updateFormData] = React.useState(initialFormData)
   const [branches, setBranches] = useState([])
+  const [companies, setCompanies] = useState([])
+  const [addProducts, setAddProducts] = useState(false)
 
   useEffect(() => {
     getBranches()
+    getCompanies()
   }, [])
 
   async function getBranches() {
@@ -29,6 +35,16 @@ export default function Offerdataform({ handleClick }) {
     console.log(result.data)
 
     setBranches(result.data)
+  }
+
+  async function getCompanies() {
+    const result = await axios
+      .get(process.env.REACT_APP_BACKEND + '/db/companies')
+      .catch((error) => console.log(error))
+
+    console.log(result.data)
+
+    setCompanies(result.data)
   }
 
   var date1 = new Date()
@@ -47,7 +63,7 @@ export default function Offerdataform({ handleClick }) {
       uci: obj.uci,
       rci: obj.rci,
       age: process.env.REACT_APP_SX_AGE1,
-      kdnr: process.env.REACT_APP_SX_KDNR1,
+      kdnr: obj.kdnr,
       ctyp: 'P',
       wakz: 'KRW',
       posl: 'GB',
@@ -67,8 +83,9 @@ export default function Offerdataform({ handleClick }) {
     handleClick('availability', querystr)
   }
 
-  const handleChange = (event) => {
-    console.log({ [event.target.name]: event.target.value.trim() })
+  /*   const handleChange = (event) => {
+    console.log(event.target.name + ' ' + event.target.agia)
+    //console.log({ [event.target.name]: event.target.value.trim() })
     updateFormData({
       ...formData,
 
@@ -76,17 +93,16 @@ export default function Offerdataform({ handleClick }) {
 
       [event.target.name]: event.target.value.trim(),
     })
-  }
+    console.log(formData)
+  } */
 
-  const handleBranchChange = (event, param) => {
-    console.log(param)
-    console.log({ [param]: event[0].StationID })
+  const handleChange = (key, value) => {
     updateFormData({
       ...formData,
 
       // Trimming any whitespace
 
-      [param]: event[0].StationID,
+      [key]: value,
     })
   }
 
@@ -106,7 +122,9 @@ export default function Offerdataform({ handleClick }) {
           <Card.Title>Request Form</Card.Title>
           <form onSubmit={(e) => handleSubmit(e)}>
             <div class="form-group">
-              <label class="lbl-form" htmlFor="uci">Check-out Branch</label>
+              <label class="lbl-form" htmlFor="uci">
+                Check-out Branch
+              </label>
               <Typeahead
                 single
                 clearButton
@@ -115,8 +133,7 @@ export default function Offerdataform({ handleClick }) {
                 onChange={(e) => {
                   if (e[0] === undefined || null) {
                   } else {
-                    const f = 'uci'
-                    handleBranchChange(e, f)
+                    handleChange('uci', e[0].StationID)
                   }
                 }}
                 options={branches}
@@ -130,7 +147,9 @@ export default function Offerdataform({ handleClick }) {
               />
             </div>
             <div class="form-group">
-              <label class="lbl-form" htmlFor="rci">Return Branch</label>
+              <label class="lbl-form" htmlFor="rci">
+                Return Branch
+              </label>
               <Typeahead
                 single
                 clearButton
@@ -139,8 +158,7 @@ export default function Offerdataform({ handleClick }) {
                 onChange={(e) => {
                   if (e[0] === undefined || null) {
                   } else {
-                    const f = 'rci'
-                    handleBranchChange(e, f)
+                    handleChange('rci', e[0].StationID)
                   }
                 }}
                 options={branches}
@@ -155,7 +173,9 @@ export default function Offerdataform({ handleClick }) {
             </div>
             <div class="form-row">
               <div class="form-group col">
-                <label class="lbl-form" htmlFor="uda">Check-out date</label>
+                <label class="lbl-form" htmlFor="uda">
+                  Check-out date
+                </label>
                 <input
                   class="form-control"
                   type="date"
@@ -163,13 +183,18 @@ export default function Offerdataform({ handleClick }) {
                   key="5"
                   id="uda"
                   name="uda"
-                  onChange={handleChange}
+                  onChange={(e) => {
+                    e.preventDefault()
+                    handleChange(e.target.name, e.target.value.trim())
+                  }}
                   required={true}
                   placeholder="Check-out date"
                 />
               </div>
               <div class="form-group col">
-                <label class="lbl-form" htmlFor="uti">Time</label>
+                <label class="lbl-form" htmlFor="uti">
+                  Time
+                </label>
                 <input
                   class="form-control"
                   type="time"
@@ -177,14 +202,19 @@ export default function Offerdataform({ handleClick }) {
                   key="5"
                   id="uti"
                   name="uti"
-                  onChange={handleChange}
+                  onChange={(e) => {
+                    e.preventDefault()
+                    handleChange(e.target.name, e.target.value.trim())
+                  }}
                   required={true}
                 />
               </div>
             </div>
             <div class="form-row">
               <div class="form-group col">
-                <label class="lbl-form" htmlFor="uda">Return date</label>
+                <label class="lbl-form" htmlFor="uda">
+                  Return date
+                </label>
                 <input
                   class="form-control"
                   type="date"
@@ -192,13 +222,18 @@ export default function Offerdataform({ handleClick }) {
                   key="5"
                   id="rda"
                   name="rda"
-                  onChange={handleChange}
+                  onChange={(e) => {
+                    e.preventDefault()
+                    handleChange(e.target.name, e.target.value.trim())
+                  }}
                   required={true}
                   placeholder="Return date"
                 />
               </div>
               <div class="form-group col">
-                <label class="lbl-form" htmlFor="rti">Time</label>
+                <label class="lbl-form" htmlFor="rti">
+                  Time
+                </label>
                 <input
                   class="form-control"
                   type="time"
@@ -206,23 +241,86 @@ export default function Offerdataform({ handleClick }) {
                   key="5"
                   id="rti"
                   name="rti"
-                  onChange={handleChange}
+                  onChange={(e) => {
+                    e.preventDefault()
+                    handleChange(e.target.name, e.target.value.trim())
+                  }}
                   required={true}
                 />
               </div>
             </div>
             <label class="my-1 mr-2 lbl-form" for="inlineFormCustomSelectPref">
-                Please choose your rate
+              Please choose your rate
             </label>
             <select
               class="custom-select my-1 mr-sm-2"
               id="inlineFormCustomSelectPref"
+              id="kdnr"
+              name="kdnr"
+              onChange={(e) => {
+                if (e.target.value === 'other') {
+                  setAddProducts(true)
+                } else {
+                  setAddProducts(false)
+                  handleChange(e.target.name, parseInt(e.target.value))
+                }
+              }}
             >
               <option selected>Choose...</option>
-              <option value="1">One</option>
-              <option value="2">Two</option>
-              <option value="3">Three</option>
+              {products.map((product, index) => (
+                <option
+                  value={product.kdnr}
+                  key={index}
+                  id={product.Segment}
+                  {...product}
+                >
+                  {product.Segment}
+                </option>
+              ))}
+              <option value={'other'}>Other Corporate Rate</option>
             </select>
+{/*             <select
+              class={addProducts ? 'custom-select my-1 mr-sm-2' : 'hidden'}
+              id="kdnr"
+              name="kdnr"
+              onChange={(e) => {
+                console.log(e)
+                e.preventDefault()
+                handleChange(e.target.name, e.target.value)
+              }}
+            >
+              <option selected>Choose...</option>
+              {companies.map((company, index) => (
+                <option
+                  value={company.KDNR}
+                  key={index}
+                  id={company._id}
+                  {...company}
+                >
+                  {company.Name1}
+                </option>
+              ))}
+            </select> */}
+
+            <Typeahead
+              single
+              clearButton
+              className={addProducts ? '' : 'hidden'}
+              id="kdnr"
+              name="kdnr"
+              onChange={(e) => {
+                if (e[0] === undefined || null) {
+                } else {
+                  handleChange('kdnr', parseInt(e[0].KDNR))
+                }
+              }}
+              options={companies}
+              labelKey={(option) => `${option.Name1}`}
+              size="default"
+              minLength="3"
+              placeholder="Enter company name"
+              required={false}
+            />
 
             <div class="custom-control custom-checkbox my-1 mr-sm-2">
               <input
@@ -230,7 +328,10 @@ export default function Offerdataform({ handleClick }) {
                 class="custom-control-input"
                 id="customControlInline"
               />
-              <label class="custom-control-label lbl-form" for="customControlInline">
+              <label
+                class="custom-control-label lbl-form"
+                for="customControlInline"
+              >
                 Remember my preference
               </label>
             </div>

@@ -9,6 +9,7 @@ import { logRoles } from '@testing-library/react'
 import logo from "./files/logo.png"
 
 export default function App() {
+  console.log(JSON.parse(process.env.REACT_APP_PRODUCTS))
   return (
     <>
       {/* <div>{Aromanize.hangulToLatin('희주')}</div> */}
