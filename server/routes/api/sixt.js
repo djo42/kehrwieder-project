@@ -27,7 +27,7 @@ router.get('/:api', async (req, res) => {
     .catch((error) => console.log(error))
 
   if (req.params['api'] === 'reservation') {
-    const resdata = await {
+    const resdata = {
       resn: response.data.Result.Reservation.Number,
       secu: response.data.Result.Reservation.SecurityCode,
       rate: response.data.Result.Reservation.Rate.Code,
