@@ -24,67 +24,35 @@ export default function Offerdataform({ handleClick }) {
   const [addProducts, setAddProducts] = useState(false)
 
   useEffect(() => {
-    getBranches()
-    //getCompanies()
+    getTypeahead()
   }, [])
 
-  const endpoint = process.env.REACT_APP_SX_API
-
-  // const basicauth = `Basic ${base64.encode(
-  //   `${process.env.SX_BASIC_USER}:${process.env.SX_BASIC_PASS}`
-  // )}`
-
-  // const basicauth = btoa(
-  //   process.env.REACT_APP_AUTH_USR + ':' + process.env.REACT_APP_AUTH_USR
-  // )
+  const api = process.env.REACT_APP_BACKEND
 
   const basicauth = `Basic ${btoa(
     `${process.env.REACT_APP_AUTH_USR}:${process.env.REACT_APP_AUTH_PWD}`
   )}`
 
-  console.log(endpoint + ' ' + basicauth)
+  console.log(api + ' ' + basicauth)
 
-  async function getBranches() {
-    const headers = {
-      Accept: 'text/json',
-      Authorization: basicauth,
-      Test: '123',
-    }
-
-    await fetch('http://localhost:4000/db', {
-      method: 'GET', // *GET, POST, PUT, DELETE, etc.
-      //mode: 'cors', // no-cors, *cors, same-origin
-      //cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
-      //credentials: 'same-origin', // include, *same-origin, omit
-      headers: headers,
-      //redirect: 'follow', // manual, *follow, error
-      //referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
-    })
-      .then((dat) => {
-        console.log(dat.data)
-
-        setBranches(dat.data)
-        return dat
-      })
-      .catch((error) => console.log(error))
-  }
-
-  async function getCompanies() {
-    const result = axios({
-      method: 'get', //you can set what request you want to be
-      url: 'http://localhost:4000/db/companies',
+  async function getTypeahead() {
+    const config = {
       headers: {
-        Accept: 'text/plain',
         Authorization: basicauth,
-        'Content-Type': 'text/plan',
       },
-    })
-      .then((dat) => {
-        console.log(dat.data)
-        setCompanies(dat.data)
-        return dat
-      })
-      .catch((error) => console.log(error))
+    }
+    const requestBranches = axios.get(api + '/db', config)
+    const requestCompanies = axios.get(api + '/db/companies', config)
+
+    axios
+      .all([requestBranches, requestCompanies])
+      .then(
+        axios.spread((...responses) => {
+          setBranches(responses[0].data)
+          setCompanies(responses[1].data)
+        })
+      )
+      .catch((err) => console.log(err))
   }
 
   var date1 = new Date()
@@ -122,19 +90,6 @@ export default function Offerdataform({ handleClick }) {
 
     handleClick('availability', querystr)
   }
-
-  /*   const handleChange = (event) => {
-    console.log(event.target.name + ' ' + event.target.agia)
-    //console.log({ [event.target.name]: event.target.value.trim() })
-    updateFormData({
-      ...formData,
-
-      // Trimming any whitespace
-
-      [event.target.name]: event.target.value.trim(),
-    })
-    console.log(formData)
-  } */
 
   const handleChange = (key, value) => {
     updateFormData({
@@ -177,9 +132,7 @@ export default function Offerdataform({ handleClick }) {
                   }
                 }}
                 options={branches}
-                labelKey={(option) =>
-                  `${option.Name} (${option.Address.Country})`
-                }
+                labelKey={(option) => `${option.Name} (${option.Address})`}
                 size="default"
                 minLength="3"
                 placeholder="Check-out branch"
@@ -202,9 +155,7 @@ export default function Offerdataform({ handleClick }) {
                   }
                 }}
                 options={branches}
-                labelKey={(option) =>
-                  `${option.Name} (${option.Address.Country})`
-                }
+                labelKey={(option) => `${option.Name} (${option.Address})`}
                 size="default"
                 minLength="3"
                 placeholder="Return branch"
