@@ -3,6 +3,7 @@ import '../App.css'
 import React, { useEffect, useState } from 'react'
 import { Card } from 'react-bootstrap'
 import { Typeahead } from 'react-bootstrap-typeahead'
+import { Base64 } from 'js-base64'
 
 export default function Offerdataform({ handleClick }) {
   const initialFormData = Object.freeze({
@@ -24,27 +25,66 @@ export default function Offerdataform({ handleClick }) {
 
   useEffect(() => {
     getBranches()
-    getCompanies()
+    //getCompanies()
   }, [])
 
+  const endpoint = process.env.REACT_APP_SX_API
+
+  // const basicauth = `Basic ${base64.encode(
+  //   `${process.env.SX_BASIC_USER}:${process.env.SX_BASIC_PASS}`
+  // )}`
+
+  // const basicauth = btoa(
+  //   process.env.REACT_APP_AUTH_USR + ':' + process.env.REACT_APP_AUTH_USR
+  // )
+
+  const basicauth = `Basic ${btoa(
+    `${process.env.REACT_APP_AUTH_USR}:${process.env.REACT_APP_AUTH_PWD}`
+  )}`
+
+  console.log(endpoint + ' ' + basicauth)
+
   async function getBranches() {
-    const result = await axios
-      .get(process.env.REACT_APP_BACKEND + '/db')
+    const headers = {
+      Accept: 'text/json',
+      Authorization: basicauth,
+      Test: '123',
+    }
+
+    await fetch('http://localhost:4000/db', {
+      method: 'GET', // *GET, POST, PUT, DELETE, etc.
+      //mode: 'cors', // no-cors, *cors, same-origin
+      //cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+      //credentials: 'same-origin', // include, *same-origin, omit
+      headers: headers,
+      //redirect: 'follow', // manual, *follow, error
+      //referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+    })
+      .then((dat) => {
+        console.log(dat.data)
+
+        setBranches(dat.data)
+        return dat
+      })
       .catch((error) => console.log(error))
-
-    console.log(result.data)
-
-    setBranches(result.data)
   }
 
   async function getCompanies() {
-    const result = await axios
-      .get(process.env.REACT_APP_BACKEND + '/db/companies')
+    const result = axios({
+      method: 'get', //you can set what request you want to be
+      url: 'http://localhost:4000/db/companies',
+      headers: {
+        Accept: 'text/plain',
+        Authorization: basicauth,
+        'Content-Type': 'text/plan',
+      },
+    })
+      .then((dat) => {
+        console.log(dat.data)
+        setCompanies(dat.data)
+        return dat
+      })
       .catch((error) => console.log(error))
-
-    console.log(result.data)
-
-    setCompanies(result.data)
   }
 
   var date1 = new Date()

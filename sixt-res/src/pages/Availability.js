@@ -16,21 +16,44 @@ export default function Availability() {
 
   //Call the API
 
+  const endpoint = process.env.REACT_APP_SX_API + '/api/sixt/'
+
+  // const basicauth = `Basic ${base64.encode(
+  //   `${process.env.SX_BASIC_USER}:${process.env.SX_BASIC_PASS}`
+  // )}`
+
+  const basicauth = btoa(
+    process.env.REACT_APP_AUTH_USR + ':' + process.env.REACT_APP_AUTH_USR
+  )
+
+  console.log(basicauth)
+
   async function callSixt(apiname, parameters) {
     const result = await axios
-      .get(`${process.env.REACT_APP_SX_API}${apiname}${parameters}`)
-      .catch((error) => console.log(error))
+      .get({
+        method: 'get', //you can set what request you want to be
+        url: endpoint,
+        headers: {
+          Accept: 'text/json,application/json',
+          'Content-Type': 'text/html',
+          Authorization: basicauth,
+        },
+      })
+      .then((dat) => setList(dat.data.Result.Offers))
+      .catch((error) => {
+        console.log(error)
+      })
 
-    //window.sessionStorage.setItem('offer', JSON.stringify(result))
-
-    //localStorage.setItem('offer', JSON.stringify(result))
-    localStorage.removeItem('offer')
-    //localStorage.removeItem('sxres')
-    //window.sessionStorage.removeItem('offer')
-    console.log(localStorage)
-
-    setList(result.data.Result.Offers)
+    return result
   }
+
+  //window.sessionStorage.setItem('offer', JSON.stringify(result))
+
+  //localStorage.setItem('offer', JSON.stringify(result))
+  localStorage.removeItem('offer')
+  //localStorage.removeItem('sxres')
+  //window.sessionStorage.removeItem('offer')
+  console.log(localStorage)
 
   //Transfer API result into dynamic state 'display'
 
