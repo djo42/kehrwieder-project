@@ -16,7 +16,7 @@ export default function Availability() {
 
   //Call the API
 
-  const endpoint = process.env.REACT_APP_BACKEND + '/api/soap'
+  const endpoint = process.env.REACT_APP_BACKEND + '/api/AvailabilityRequest'
 
   // const basicauth = `Basic ${base64.encode(
   //   `${process.env.SX_BASIC_USER}:${process.env.SX_BASIC_PASS}`

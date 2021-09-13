@@ -3,7 +3,6 @@ import '../App.css'
 import React, { useEffect, useState } from 'react'
 import { Card } from 'react-bootstrap'
 import { Typeahead } from 'react-bootstrap-typeahead'
-import { Base64 } from 'js-base64'
 
 export default function Offerdataform({ handleClick }) {
   const initialFormData = Object.freeze({
@@ -56,40 +55,21 @@ export default function Offerdataform({ handleClick }) {
       .catch((err) => console.log(err))
   }
 
-  var date1 = new Date()
-  var date2 = new Date()
-  var start = new Date(date1.setDate(date1.getDate() + 30))
-    .toISOString()
-    .substr(0, 10)
-  var end = new Date(date2.setDate(date2.getDate() + 37))
-    .toISOString()
-    .substr(0, 10)
-
   function serialize(obj) {
+    console.log(typeof obj.kdnr)
     var req = {
-      udt: obj.uda + 'T' + obj.uti,
-      rdt: obj.rda + 'T' + obj.rti,
-      uci: obj.uci,
-      rci: obj.rci,
+      uda: obj.uda + 'T' + obj.uti,
+      rda: obj.rda + 'T' + obj.rti,
+      uci: `${obj.uci}`,
+      rci: `${obj.rci}`,
       age: process.env.REACT_APP_SX_AGE1,
-      kdnr: obj.kdnr,
+      kdnr: `${obj.kdnr}`,
       ctyp: 'P',
       wakz: 'KRW',
-      posl: 'GB',
+      posl: 'KR',
     }
-    // console.log('serialize: ' + req)
 
-    // var str = []
-    // for (var p in req)
-    //   if (req.hasOwnProperty(p)) {
-    //     str.push(encodeURIComponent(p) + '=' + encodeURIComponent(req[p]))
-    //   }
-
-    // const querystr = '?' + str.join('&')
-
-    // console.log('availability' + querystr)
-
-    handleClick(req)
+    return handleClick(JSON.stringify(req))
   }
 
   const handleChange = (key, value) => {
@@ -107,8 +87,8 @@ export default function Offerdataform({ handleClick }) {
   const handleSubmit = (formData) => {
     //formData.preventDefault()
     console.log('handleSubmit: ' + formData)
-    // serialize(formData)
-    handleClick(formData)
+    serialize(formData)
+    //handleClick(formData)
     // ... submit to API or something
   }
 
