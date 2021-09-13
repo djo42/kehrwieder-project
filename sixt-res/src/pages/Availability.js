@@ -16,30 +16,38 @@ export default function Availability() {
 
   //Call the API
 
-  const endpoint = process.env.REACT_APP_SX_API + '/api/sixt/'
+  const endpoint = process.env.REACT_APP_BACKEND + '/api/soap'
 
   // const basicauth = `Basic ${base64.encode(
   //   `${process.env.SX_BASIC_USER}:${process.env.SX_BASIC_PASS}`
   // )}`
 
   const basicauth = btoa(
-    process.env.REACT_APP_AUTH_USR + ':' + process.env.REACT_APP_AUTH_USR
+    process.env.REACT_APP_AUTH_USR + ':' + process.env.REACT_APP_AUTH_PWD
   )
 
-  console.log(basicauth)
-
-  async function callSixt(apiname, parameters) {
-    const result = await axios
-      .get({
-        method: 'get', //you can set what request you want to be
-        url: endpoint,
-        headers: {
-          Accept: 'text/json,application/json',
-          'Content-Type': 'text/html',
-          Authorization: basicauth,
-        },
+  async function callSixt(obj) {
+    console.log(endpoint)
+    const result = await axios({
+      method: 'post',
+      url: endpoint,
+      data: obj,
+      headers: {
+        Accept: 'text/json,application/json',
+        'Content-Type': 'application/json',
+        Authorization: `Basic ${basicauth}`,
+      },
+    })
+      .then((dat) => {
+        const foo = dat.data.AvailabilityResponse.Result.Offers
+        console.log(foo[1].Car.Examples)
+        return foo
       })
-      .then((dat) => setList(dat.data.Result.Offers))
+      .then((foo) => {
+        setDisplay(foo)
+        setList(foo)
+        return foo
+      })
       .catch((error) => {
         console.log(error)
       })
@@ -102,12 +110,10 @@ export default function Availability() {
           <Card.Img
             variant="top"
             src={offer.Car.ImageUrl}
-            alt={offer.Car.Examples[0]}
+            alt={offer.Car.Examples}
           />
           <Card.Body>
-            <Card.Title>
-              {offer.Car.Examples.join(', ').toUpperCase()}
-            </Card.Title>
+            <Card.Title>{offer.Car.Examples.toUpperCase()}</Card.Title>
             <Inclusionslist offer={offer}></Inclusionslist>
             <Card.Text>
               Total Price: {display[index].Total.DueAmount}{' '}

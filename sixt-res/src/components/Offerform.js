@@ -35,12 +35,13 @@ export default function Offerdataform({ handleClick }) {
 
   console.log(api + ' ' + basicauth)
 
-  async function getTypeahead() {
+  function getTypeahead() {
     const config = {
       headers: {
         Authorization: basicauth,
       },
     }
+
     const requestBranches = axios.get(api + '/db', config)
     const requestCompanies = axios.get(api + '/db/companies', config)
 
@@ -76,19 +77,19 @@ export default function Offerdataform({ handleClick }) {
       wakz: 'KRW',
       posl: 'GB',
     }
-    console.log('serialize: ' + req)
+    // console.log('serialize: ' + req)
 
-    var str = []
-    for (var p in req)
-      if (req.hasOwnProperty(p)) {
-        str.push(encodeURIComponent(p) + '=' + encodeURIComponent(req[p]))
-      }
+    // var str = []
+    // for (var p in req)
+    //   if (req.hasOwnProperty(p)) {
+    //     str.push(encodeURIComponent(p) + '=' + encodeURIComponent(req[p]))
+    //   }
 
-    const querystr = '?' + str.join('&')
+    // const querystr = '?' + str.join('&')
 
-    console.log('availability' + querystr)
+    // console.log('availability' + querystr)
 
-    handleClick('availability', querystr)
+    handleClick(req)
   }
 
   const handleChange = (key, value) => {
@@ -106,7 +107,8 @@ export default function Offerdataform({ handleClick }) {
   const handleSubmit = (formData) => {
     //formData.preventDefault()
     console.log('handleSubmit: ' + formData)
-    serialize(formData)
+    // serialize(formData)
+    handleClick(formData)
     // ... submit to API or something
   }
 
