@@ -28,27 +28,26 @@ export const Headlinewrapper = styled.div`
   padding: 15px;
 `
 
-
 //Form Components
 
 export const InputcontainerRow = styled.div`
-    display: flex;
-    flex-direction: row;
-    align-items: stretch;
-    justify-items: middle;
-    margin: 10px;
-    padding: 5px;
-    width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  justify-items: middle;
+  margin: 10px;
+  padding: 5px;
+  width: 100%;
 `
 
 export const InputcontainerColumn = styled.div`
-    display: flex;
-    flex-direction: column;
-    align-items: stretch;
-    justify-items: middle;
-    margin: 10px;
-    padding: 5px;
-    width: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-items: middle;
+  margin: 10px;
+  padding: 5px;
+  width: auto;
 `
 
 export const Input = styled.input`
@@ -99,43 +98,43 @@ export const BranchInput = styled.input`
 `
 
 export const Label = styled.label`
-    margin: 0;
-    padding: 0;
-    font-size: 12px;
-    color: grey;
-    pointer-events: none;
-    transition: .5s;
-    width: auto;
+  margin: 0;
+  padding: 0;
+  font-size: 12px;
+  color: grey;
+  pointer-events: none;
+  transition: 0.5s;
+  width: auto;
 `
 
 //Offer Display
 
 export const Card = styled.div`
-    display: flex;
-    flex-direction:column;
-    align-items: left;
-    justify-content: left;
-    width: auto;
-    padding: 0;
-    margin: 25px;
-    background: white;  
-    box-sizing: border-box;
-    box-shadow: 0 15px 25px rgba(0,0,0,.6);
-    border-radius: 10px;
-    color: black;
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+  justify-content: left;
+  width: auto;
+  padding: 0;
+  margin: 25px;
+  background: white;
+  box-sizing: border-box;
+  box-shadow: 0 15px 25px rgba(0, 0, 0, 0.6);
+  border-radius: 10px;
+  color: black;
 `
 
 export const Cardcontainer = styled.div`
-    display: flex;
-    flex-direction:column;
-    align-items: left;
-    justify-content: left;
-    width: 100%;
-    padding: 0 20px;
-    margin: 0;
-    background: transparent;  
-    box-sizing: border-box;
-    border: none;
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+  justify-content: left;
+  width: 100%;
+  padding: 0 20px;
+  margin: 0;
+  background: transparent;
+  box-sizing: border-box;
+  border: none;
 `
 
 export const Button = styled.button`
@@ -155,14 +154,14 @@ export const Button = styled.button`
 `
 
 export const Carpic = styled.img`
-    top: 0;
-    left:0;
-    width: 100%;
-    height: auto;
-    border-radius: 10px 10px 0 0;
-    margin: 0;
-    padding:0;
-    z-index: 99;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: auto;
+  border-radius: 10px 10px 0 0;
+  margin: 0;
+  padding: 0;
+  z-index: 99;
 `
 
 export const Imgcontainer = styled.div`
@@ -209,10 +208,11 @@ export const Tag = styled.li`
 //Headline
 
 export const Headline = styled.h2`
-  display: inline-block;
+  display: flex;
   line-height: 150%;
   text-align: left;
-  color: white;
+  color: grey;
+  background-color: white;
   font-size: 1.2em;
   padding: 0;
   margin: 0;
@@ -220,27 +220,27 @@ export const Headline = styled.h2`
 
 export const OfferCardHeadline = styled.h2`
   position: absolute;
-    top: 20px;
-    left:20px;
-    line-height: 160%;
-    text-align: left;
-    color: white;
-    font-size: 1em;
-    padding: 0;
-    margin:0;
-    margin-right: 20px;
-    z-index: 100;
+  top: 20px;
+  left: 20px;
+  line-height: 160%;
+  text-align: left;
+  color: white;
+  font-size: 1em;
+  padding: 0;
+  margin: 0;
+  margin-right: 20px;
+  z-index: 100;
 `
 
 export const Textwrapper = styled.span`
-    color: white;
-    background: black;
-    text-align: center;
-    vertical-align:middle;
-    line-height: 1.5rem;
-    font-size: 1.25rem;
-    padding: 5px 10px;
-    box-decoration-break: clone;
+  color: white;
+  background: white;
+  text-align: center;
+  vertical-align: middle;
+  line-height: 1.5rem;
+  font-size: 1.25rem;
+  padding: 5px 10px;
+  box-decoration-break: clone;
 `
 
 //Functional Elements
@@ -252,33 +252,33 @@ export const Toggler = styled.div`
   padding: 6px;
   margin: 1px;
   border: 0.5px solid silver;
-  background: #F8F8F8;
+  background: #f8f8f8;
   color: grey;
   text-align: left;
-  vertical-align:middle;
+  vertical-align: middle;
   align-elements: center;
   width: auto;
   border-radius: 5px;
   min-height: 38px;
-  `
+`
 
 export const Filterbar = styled.div`
-    display: flex;
-    padding: 10px;
-    margin: 10px;
-    max-height: 100px;
+  display: flex;
+  padding: 10px;
+  margin: 10px;
+  max-height: 100px;
 `
 
 export const Filtercontainer = styled.div`
-    align-items: center;
-    font-size: 0.75em;
-    padding-right: 1.5625rem;
-    text-align: center;
-    height: auto;
-    width: auto;
-    padding-bottom: 0;
-    vertical-align: middle;
-    margin: 10px;
+  align-items: center;
+  font-size: 0.75em;
+  padding-right: 1.5625rem;
+  text-align: center;
+  height: auto;
+  width: auto;
+  padding-bottom: 0;
+  vertical-align: middle;
+  margin: 10px;
 `
 
 export const StyledTable = styled.table`

@@ -1,9 +1,9 @@
 import 'bootstrap/dist/css/bootstrap.min.css'
 import React, { useEffect, useState } from 'react'
 import '../App.css'
-import getSixt from '../services.js'
 import { Toggler } from './Components.js'
 import Coverage from './Coverage.js'
+import axios from 'axios'
 
 export default function Inclusionslist({ offer }) {
   const [visibility, setVisibility] = useState(false)
@@ -16,25 +16,58 @@ export default function Inclusionslist({ offer }) {
     setLoaded(false)
   }, [])
 
+  const endpoint = process.env.REACT_APP_BACKEND + '/api/AvailabilityRequest'
+
+  // const basicauth = `Basic ${base64.encode(
+  //   `${process.env.SX_BASIC_USER}:${process.env.SX_BASIC_PASS}`
+  // )}`
+
+  const basicauth = btoa(
+    process.env.REACT_APP_AUTH_USR + ':' + process.env.REACT_APP_AUTH_PWD
+  )
+
+  console.log(offer)
+
   async function getDetails() {
     console.log('Loaded 1: ' + loaded)
     console.log(visibility)
     setLoading(true)
-    if (visibility === false && resdetails.length === 0) {
-      const result = await getSixt(
-        'availabilitydetails',
-        '?avrw=' + offer.AvailabilityRow
-      )
-        .then((result) => {
-          setResdetails(result.data)
-          setLoaded(true)
-          setVisibility(!visibility)
-        })
-        .catch((err) => console.log(err))
-    }
 
-    setVisibility(!visibility)
-    setLoading(false)
+    const result = new Promise((resolve, reject) => {
+      if (visibility === false && resdetails.length === 0) {
+        axios({
+          method: 'post',
+          url: endpoint,
+          data: { AvailabilityRow: offer.AvailabilityRow },
+          headers: {
+            Accept: 'text/json,application/json',
+            'Content-Type': 'application/json',
+            Authorization: `Basic ${basicauth}`,
+            api: 'AvailabilityDetailsRequest',
+          },
+        })
+          .then((result) => {
+            const details = result.data.AvailabilityDetailsResponse
+            setResdetails(details)
+            setLoaded(true)
+            setLoading(false)
+            setVisibility(!visibility)
+            return details
+          })
+          .then((details) => {
+            return resolve(details)
+          })
+          .catch((err) => {
+            return reject(err)
+          })
+      } else {
+        setVisibility(!visibility)
+        setLoading(false)
+        resolve()
+      }
+    })
+
+    return result
   }
 
   const incrementalSales = (obj) => {

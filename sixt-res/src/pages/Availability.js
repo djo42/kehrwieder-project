@@ -36,6 +36,7 @@ export default function Availability() {
         Accept: 'text/json,application/json',
         'Content-Type': 'application/json',
         Authorization: `Basic ${basicauth}`,
+        api: 'AvailabilityRequest',
       },
     })
       .then((dat) => {

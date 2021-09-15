@@ -10,7 +10,3 @@ export default async function getSixt(apiname, parameters) {
 
   return result
 }
-
-
-
-

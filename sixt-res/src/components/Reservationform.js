@@ -22,7 +22,7 @@ export default function Reservationform({ handleClick, avrw }) {
       nam2: obj.nam2,
       emai: obj.emai,
       age: process.env.REACT_APP_SX_AGE1,
-      avrw: offerid,
+      avrw: avrw,
     }
     console.log(req)
 
@@ -36,7 +36,8 @@ export default function Reservationform({ handleClick, avrw }) {
 
     console.log('reservation' + querystr)
 
-    handleClick('reservation', querystr)
+    //handleClick('reservation', querystr)
+    handleClick(req)
   }
 
   const handleChange = (event) => {
@@ -115,7 +116,7 @@ export default function Reservationform({ handleClick, avrw }) {
   return (
     <Card>
       <Textwrapper>
-        <Headline>ENTER RENTER DETAILS</Headline>
+        <Headline>Enter renter details</Headline>
       </Textwrapper>
       <div className="container">
         <FormKit

@@ -35,6 +35,7 @@ export default function Offerdataform({ handleClick }) {
   console.log(api + ' ' + basicauth)
 
   function getTypeahead() {
+    console.log("bis hier")
     const config = {
       headers: {
         Authorization: basicauth,
