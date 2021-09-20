@@ -16,18 +16,19 @@ export default function Availability() {
 
   //Call the API
 
-  const endpoint = process.env.REACT_APP_BACKEND + '/api/AvailabilityRequest'
+  const endpoint = process.env.REACT_APP_BACKEND + '/api/sixt'
 
   // const basicauth = `Basic ${base64.encode(
   //   `${process.env.SX_BASIC_USER}:${process.env.SX_BASIC_PASS}`
   // )}`
 
-  const basicauth = btoa(
-    process.env.REACT_APP_AUTH_USR + ':' + process.env.REACT_APP_AUTH_PWD
-  )
+  const basicauth = `Basic ${Buffer.from(
+    `${process.env.REACT_APP_AUTH_USR}:${process.env.REACT_APP_AUTH_PWD}`,
+    'utf8'
+  ).toString('base64')}`
 
   async function callSixt(obj) {
-    console.log(endpoint)
+    console.log(obj)
     const result = await axios({
       method: 'post',
       url: endpoint,
@@ -35,8 +36,7 @@ export default function Availability() {
       headers: {
         Accept: 'text/json,application/json',
         'Content-Type': 'application/json',
-        Authorization: `Basic ${basicauth}`,
-        api: 'AvailabilityRequest',
+        Authorization: basicauth,
       },
     })
       .then((dat) => {

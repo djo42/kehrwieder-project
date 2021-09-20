@@ -2,10 +2,17 @@ import axios from 'axios'
 import '../App.css'
 import React, { useEffect, useState } from 'react'
 import { Card } from 'react-bootstrap'
-import { Typeahead } from 'react-bootstrap-typeahead'
+import {
+  Typeahead,
+  Menu,
+  MenuItem,
+  Highlighter,
+  small,
+} from 'react-bootstrap-typeahead'
 
 export default function Offerdataform({ handleClick }) {
   const initialFormData = Object.freeze({
+    api: 'AvailabilityRequest',
     uci: '',
     uti: '',
     uda: '',
@@ -35,14 +42,14 @@ export default function Offerdataform({ handleClick }) {
   console.log(api + ' ' + basicauth)
 
   function getTypeahead() {
-    console.log("bis hier")
+    console.log('bis hier')
     const config = {
       headers: {
         Authorization: basicauth,
       },
     }
 
-    const requestBranches = axios.get(api + '/db', config)
+    const requestBranches = axios.get(api + '/db/cities', config)
     const requestCompanies = axios.get(api + '/db/companies', config)
 
     axios
@@ -59,6 +66,7 @@ export default function Offerdataform({ handleClick }) {
   function serialize(obj) {
     console.log(typeof obj.kdnr)
     var req = {
+      api: 'AvailabilityRequest',
       uda: obj.uda + 'T' + obj.uti,
       rda: obj.rda + 'T' + obj.rti,
       uci: `${obj.uci}`,
@@ -271,6 +279,20 @@ export default function Offerdataform({ handleClick }) {
               minLength="3"
               placeholder="Enter company name"
               required={false}
+              renderMenu={(results, menuProps) => (
+                <Menu {...menuProps}>
+                  {results.map((result, index) => (
+                    <MenuItem option={result} position={index}>
+                      <Highlighter>{result.Name1}</Highlighter>
+                      <br></br>
+                      <small>
+                        {result.Strasse}
+                        <br></br>{result.PLZ} {result.Ort}
+                      </small>
+                    </MenuItem>
+                  ))}
+                </Menu>
+              )}
             />
 
             <div class="custom-control custom-checkbox my-1 mr-sm-2">
